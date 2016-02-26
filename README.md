@@ -11,4 +11,4 @@ Telnet/SSH (not fully implemented)
 Browser (IE and Chrome)
 
 
-The project is currently not perfect. There are some things that should be optimized, but it is released anyway.
+The project is currently not perfect. There are some things that should be optimized, but this is the first release.
