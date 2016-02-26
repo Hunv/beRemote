@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="beRemote.VendorProtocols.RDP.GUI.ResizeMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="500">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="1" />
+                <GradientStop Color="#FFFFFACB" Offset="0.477" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0">Would you like to resize the RDP Connection to fit to the tab again?</Label>
+        <Button Height="23" Width="100" Margin="0,21,224,6" x:Name="cmdResizeIt" HorizontalAlignment="Right">Yes, do it!</Button>
+        <Button Height="23" Width="100" Margin="0,21,118,6" x:Name="cmdNoResize" HorizontalAlignment="Right">No, it's fine!</Button>
+        <Button Height="23" Margin="0,21,12,6" x:Name="cmdIgnore" HorizontalAlignment="Right" Width="100">Ignore it!</Button>
+    </Grid>
+</UserControl>

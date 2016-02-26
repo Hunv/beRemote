@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleManageVpn">Manage VPN</system:String>
+    <system:String x:Key="NewVpnConnection">New VPN Connection</system:String>
+    <system:String x:Key="ConfigureFirst">Configure the selected VPN connection first</system:String>
+    <system:String x:Key="ConfigureFirstTitle">Information are missing</system:String>
+    
+    <!-- Windows VPN related -->
+    <system:String x:Key="WinVpnTestStep1">VPN should be connected now. Click OK to disconnect.</system:String>
+    <system:String x:Key="WinVpnTestStep1Title">Connection initialized</system:String>
+    <system:String x:Key="WinVpnTestStep1Fail">Failed to connect. Check your settings and if the connection works without beRemote.</system:String>
+    <system:String x:Key="WinVpnTestStep1FailTitle">Failed to connect</system:String>
+    
+    <!-- Cisco VPN related-->
+    <system:String x:Key="CiscoVpnTestStep1">Check if the connection is established</system:String>
+    <system:String x:Key="CiscoVpnTestStep1Title">Test your connection</system:String>
+    <system:String x:Key="CiscoVpnTestStep1Fail">Failed to connect. Check your settings and if the connection works without beRemote.</system:String>
+    <system:String x:Key="CiscoVpnTestStep1FailTitle">Failed to connect</system:String>
+    
+    <!-- OpenVPN related -->
+    <system:String x:Key="OvVpnTestStep1">Check if the connection is established</system:String>
+    <system:String x:Key="OvVpnTestStep1Title">Test your connection</system:String>
+    <system:String x:Key="OvVpnTestStep1Fail">Failed to connect. Check your settings and if the connection works without beRemote.</system:String>
+    <system:String x:Key="OvVpnTestStep1FailTitle">Failed to connect</system:String>
+    
+    <!-- ShrewSoft VPN related -->
+    <system:String x:Key="SsVpnTestStep1">The connection should now be established. Check if this is the case. beRemote cannot check this automatically. You have to disconnect it by yourself from the ShrewSoft VPN-Client.</system:String>
+    <system:String x:Key="SsVpnTestStep1Title">Connection initialized</system:String>
+    <system:String x:Key="SsVpnTestStep1Fail">Failed to connect. Check your settings and if the connection works without beRemote.</system:String>
+    <system:String x:Key="SsVpnTestStep1FailTitle">Failed to connect</system:String>
+    
+    <!-- UI -->
+    <system:String x:Key="TabVpnVpnProfiles">VPN Profiles:</system:String>
+    <system:String x:Key="TabVpnVpnType">VPN Type</system:String>
+    <system:String x:Key="TabVpnVpnDescription">VPN Description</system:String>
+    <system:String x:Key="TabVpnSelectVpnType">Please select a VPN type</system:String>
+    <system:String x:Key="TabVpnSelectVpnTypeAbove">Please select a VPN type above.</system:String>
+    <system:String x:Key="TabVpnCiscoName">Name of Connection Entry</system:String>
+    <system:String x:Key="TabVpnCiscoPath">Path of Cisco VPN Client (vpnclient.exe)</system:String>
+    <system:String x:Key="TabVpnCiscoAuthentication">Authentication</system:String>
+    <system:String x:Key="TabVpnCiscoShowAuthDialog">Show Authentication-Dialog</system:String>
+    <system:String x:Key="TabVpnCiscoUseCredentials">Use following credentials:</system:String>
+    <system:String x:Key="TabVpnOpenFile">Path of config-File</system:String>
+    <system:String x:Key="TabVpnOpenExe">Path of openvpn.exe</system:String>
+    <system:String x:Key="TabVpnOpenHelp">Don't have a Client? Download it on http://openvpn.net/index.php/open-source/downloads.html</system:String>
+    <system:String x:Key="TabVpnWinName">Name of VPN connection:</system:String>
+    <system:String x:Key="TabVpnWinAuthentication">Authentication</system:String>
+    <system:String x:Key="TabVpnWinShowAuthDialog">Show Authentication-Dialog</system:String>
+    <system:String x:Key="TabVpnWinUseCredentials">Use following credentials:</system:String>
+    <system:String x:Key="TabVpnShrewName">Name of VPN connection:</system:String>
+    <system:String x:Key="TabVpnShrewIpsec">Path of ipsecc.exe:</system:String>
+    <system:String x:Key="TabVpnShrewAuthentication">Authentication</system:String>
+    <system:String x:Key="TabVpnShrewShowAuthDialog">Show Authentication-Dialog</system:String>
+    <system:String x:Key="TabVpnShrewUseCredentials">Use following credentials:</system:String>
+    <system:String x:Key="TabVpnShrewHelp1">Don't have a Client? Download it on https://www.shrew.net/download/vpn</system:String>
+    <system:String x:Key="TabVpnShrewHelp2">Attention: It is not possible to disconnect the VPN-Tunnel. The Tunnel will allways stay open after first connect!</system:String>
+
+    <!-- ToolTips -->
+    <system:String x:Key="TabVpnTooltipImageType">Shows the type of the VPN-Connection</system:String>
+    <system:String x:Key="TabVpnTooltipImageCredentials">Are credentials defined or will a dialog be shown?</system:String>
+    <system:String x:Key="TabVpnTooltipImageValid">Is the current configuration valid and can be saved?</system:String>
+    
+    
+</ResourceDictionary>

@@ -1,0 +1,3 @@
+﻿This directory contains the available plugins for download (it should, at least).
+Plugin files are in format .bpl (beRemote Plugin)
+

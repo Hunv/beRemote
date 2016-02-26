@@ -1,0 +1,16 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control.csprojResolveAssemblyReference.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\ConnectionTreeViewNS\ConnectionTreeView.g.cs
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\ConnectionTreeViewNS\ConnectionTreeView.baml
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control.csproj.GenerateResource.Cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control_MarkupCompile.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control_MarkupCompile.lref
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\bin\Debug\beRemote.GUI.Control.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\bin\Debug\beRemote.GUI.Control.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\bin\Debug\beRemote.Core.Definitions.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\bin\Debug\beRemote.Core.Definitions.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\ConnectionTreeViewNS\Themes\Generic.baml
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control.g.resources
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control.Properties.Resources.resources
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\beRemote.GUI.Control.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\GeneratedInternalTypeHelper.g.cs

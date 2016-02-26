@@ -1,0 +1,199 @@
+﻿<classes:TabBase xmlns:FolderView="clr-namespace:beRemote.GUI.Controls.FolderView;assembly=beRemote.GUI.Controls"  x:Class="beRemote.GUI.Tabs.ManageProfile.TabManageProfile"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+                 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                 mc:Ignorable="d" d:DesignWidth="360" d:DesignHeight="360"
+                 MinWidth="360" MinHeight="360" 
+                 IconSource="Images/user16.png"
+                 x:Name="mainTab"
+                 >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CmdTabLoaded, ElementName=mainTab}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <classes:TabBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </classes:TabBase.Resources>
+    <classes:TabBase.Header>
+        <StaticResource ResourceKey="TabTitleManageProfile"/>
+    </classes:TabBase.Header>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="28"/>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.Row="0">
+            <TabItem Header="{StaticResource TabManageProfileTabSettings}">
+                <Grid>
+                    <Label Content="{StaticResource TabManageProfileUsername}" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" />
+                    <TextBox Height="23" Margin="121,14,0,0" Name="txtUsername" VerticalAlignment="Top" IsReadOnly="True" TabIndex="1" HorizontalAlignment="Left" Width="211" Text="{Binding Username, ElementName=mainTab}"/>
+                    <Image Height="18" HorizontalAlignment="Left" Margin="314,16,0,0" Stretch="Fill" VerticalAlignment="Top" Width="18" Source="Images/lock16.png" />
+
+                    <Label Content="{StaticResource TabManageProfileDisplayname}" Height="28" HorizontalAlignment="Left" Margin="12,46,0,0" VerticalAlignment="Top" />
+                    <TextBox Height="23" Margin="121,48,0,0" Name="txtName" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210" TabIndex="10" Text="{Binding Displayname, ElementName=mainTab}"/>
+
+
+                    <GroupBox Header="{StaticResource TabManageProfileChangePassword}" Margin="10,79,0,0" Height="113" VerticalAlignment="Top" HorizontalAlignment="Left" Width="322">
+                        <Grid>
+                            <Label Content="{StaticResource TabManageProfileOldPassword}" Height="28" HorizontalAlignment="Left" Margin="0,7,0,0" VerticalAlignment="Top" />
+                            <PasswordBox HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Height="23" Width="180" Name="pbOld" TabIndex="20"/>
+
+                            <Label Content="{StaticResource TabManageProfileNewPassword}" Height="28" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top" />
+                            <PasswordBox HorizontalAlignment="Left" Margin="130,38,0,0" VerticalAlignment="Top" Height="23" Width="180" Name="pbNew1" TabIndex="30"/>
+
+                            <Label Content="{StaticResource TabManageProfileRepeatPassword}" Height="28" HorizontalAlignment="Left" Margin="0,63,0,0" VerticalAlignment="Top" />
+                            <PasswordBox HorizontalAlignment="Left" Margin="130,66,0,0" VerticalAlignment="Top" Height="23" Width="180" Name="pbNew2" TabIndex="40"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="{StaticResource TabManageProfileTabAdvanced}">
+                <StackPanel Orientation="Vertical" Margin="5,5,0,0">
+                    <CheckBox Content="{StaticResource TabManageProfileAdvancedDeleteQuickConnect}" IsChecked="{Binding DeleteQuickConnections, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=mainTab}"/>
+                    
+                    <StackPanel Orientation="Vertical" Margin="0,5,0,5">
+                        <TextBlock Text="{StaticResource TabManageProfileAdvancedDefaultFolder}"/>
+                        <FolderView:FolderView 
+                            ItemList="{Binding FolderList, ElementName=mainTab, Mode=OneWay}" 
+                            SelectedValue="{Binding SelectedDefaultFolder, Mode=TwoWay, ElementName=mainTab}"
+                            Height="150"
+                            />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="0,5,0,5">
+                        <TextBlock Text="{StaticResource TabManageProfileAdvancedDefaultProtocol}"/>
+                        <ComboBox 
+                            Grid.Column="1" 
+                            ItemsSource="{Binding ProtocolList, Mode=OneWay, ElementName=mainTab}"
+                            TextSearch.TextPath="ProtocolName"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            Height="23"
+                            Name="cmbDefaultProtocol"
+                            SelectedValuePath="ProtocolIdentifier"
+                            SelectedValue="{Binding SelectedDefaultProtocol, Mode=TwoWay, ElementName=mainTab}"
+                            >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="16"/>
+                                            <ColumnDefinition Width="4"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Source="{Binding ProtocolIconSmall}"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding ProtocolName}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            
+            <TabItem Header="{StaticResource TabManageProfileTabProxySettings}">
+                <StackPanel Margin="0,4,0,0">
+                    <RadioButton Name="rbProxyNo" GroupName="ProxyEnable" Content="{StaticResource TabManageProfileNoProxy}" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="127" IsChecked="{Binding ProxyNoProxy, ElementName=mainTab}"/>
+                    <RadioButton Name="rbProxySystem" GroupName="ProxyEnable" Content="{StaticResource TabManageProfileUseSystemSettings}" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="127" IsChecked="{Binding ProxySystemSettings, ElementName=mainTab}"/>
+                    <StackPanel>
+                        <RadioButton Name="rbProxyCustom" Content="{StaticResource TabManageProfileUseCustomSettings}" GroupName="ProxyEnable" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="127" IsChecked="{Binding ProxyCustomSettings, ElementName=mainTab}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <Label IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Content="{StaticResource TabManageProfileProxyHostname}"/>
+                                <Label IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Content="{StaticResource TabManageProfileProxyPort}"/>
+                                <Label IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Content="{StaticResource TabManageProfileProxyCredentials}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBox Name="txtProxyHost" IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Height="21" Margin="0,3,0,2" Text="{Binding ProxyHostname, ElementName=mainTab}" Width="199" HorizontalAlignment="Left"/>
+                                <TextBox Name="txtProxyPort" IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Height="21" Margin="0,3,0,2" Text="{Binding ProxyPort, ElementName=mainTab}" HorizontalAlignment="Left" Width="199"/>
+                                <StackPanel>
+                                    <RadioButton Name="rbProxyCredNo" GroupName="ProxyCredentials" IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Content="{StaticResource TabManageProfileNoCredentials}" Margin="0,7,0,2" VerticalContentAlignment="Center" IsChecked="{Binding ProxyNoCredentials, ElementName=mainTab}"/>
+                                    <RadioButton Name="rbProxyCredCustom" GroupName="ProxyCredentials" IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Margin="0,3,0,2" VerticalContentAlignment="Center" IsChecked="{Binding ProxyDefinedCredentials, ElementName=mainTab}">
+                                        <RadioButton.Content>
+                                            <ComboBox Name="cmbProxyCredCustom"  Height="21" ItemsSource="{Binding CredentialList, ElementName=mainTab}" DisplayMemberPath="Description" SelectedValuePath="Id" Width="178" SelectedValue="{Binding ProxyCredentials, ElementName=mainTab}"/>
+                                        </RadioButton.Content>
+                                    </RadioButton>
+                                    <RadioButton Name="rbProxyCredCurrent" GroupName="ProxyCredentials" IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Content="{StaticResource TabManageProfileUseCurrentCredentials}" Margin="0,0,0,2" VerticalContentAlignment="Center" IsChecked="{Binding ProxyCurrentCredentials, ElementName=mainTab}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                    <CheckBox Name="chkProxyBypassLocal" IsEnabled="{Binding IsChecked, ElementName=rbProxyCustom}" Content="{StaticResource TabManageProfileBypassProxy}" Margin="0,2,0,2"/>
+                    <CheckBox Name="chkProxySaveLocal" Content="{StaticResource TabManageProfileStoreSettingsLocal}" Margin="0,2,0,2"/>
+                </StackPanel>
+            </TabItem>
+
+
+            <TabItem Header="{StaticResource TabManageProfileTabStatistics}">
+                <TextBlock Text="{Binding Statistics, ElementName=mainTab}"/>
+            </TabItem>
+        </TabControl>
+
+        <Button 
+            Grid.Row="1"
+            Content="{StaticResource TabManageProfileSave}" 
+            Height="23" 
+            Margin="80,0,0,3" 
+            Name="btnSave" 
+            VerticalAlignment="Bottom" 
+            IsDefault="True" 
+            TabIndex="40" 
+            HorizontalAlignment="Left" 
+            Width="94"
+            Command="{Binding CmdSaveClick, ElementName=mainTab}"
+            />
+        <Button 
+            Grid.Row="1"
+            Content="{StaticResource TabManageProfileCancel}" 
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="0,0,112,3" 
+            Name="btnCancel" 
+            VerticalAlignment="Bottom" 
+            Width="75" 
+            IsCancel="True" 
+            TabIndex="50" 
+            Command="{Binding CmdCancelClick, ElementName=mainTab}"
+            />
+    </Grid>
+</classes:TabBase>

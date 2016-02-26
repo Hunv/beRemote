@@ -1,0 +1,11 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\bin\Debug\TestControl.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\bin\Debug\TestControl.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\TestControl.csprojResolveAssemblyReference.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\UserControl1.baml
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\UserControl1.g.cs
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\TestControl_MarkupCompile.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\TestControl.g.resources
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\TestControl.Properties.Resources.resources
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\TestControl.csproj.GenerateResource.Cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\TestControl.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\v2\TestControl\obj\Debug\TestControl.pdb

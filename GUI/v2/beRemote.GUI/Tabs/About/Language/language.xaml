@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleAbout">About</system:String>
+    <system:String x:Key="TabAboutText1" xml:space="preserve">Support: www.beremote.net&#10;Mail: support@beremote.net&#10;&#10;Icons by Axialis, created with Axialis IconWorkshop&#10;Docking-Grid by Adolfo Marinucci (http://avalondock.codeplex.com/)&#10;Remote Desktop Client by Microsoft&#10;Trident Engine by Microsoft&#10;SQLite Library by Robert Simpson (http://sqlite.phxsoftware.com/)&#10;Chromium(/CefSharp) by CefSharp-Team (https://github.com/cefsharp/CefSharp)</system:String>
+    <system:String x:Key="TabAboutText2" xml:space="preserve">Developed by the beRemote Team&#10;© 2012-2015 by beRemote Team&#10;&#10;</system:String>
+    <system:String x:Key="TabAboutText3" xml:space="preserve">beRemote Teammember:&#10;</system:String>
+</ResourceDictionary>

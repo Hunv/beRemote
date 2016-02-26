@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="WizFirstRunTab1">Welcome</system:String>
+    <system:String x:Key="WizFirstRunTab2">Select Mode</system:String>
+    <system:String x:Key="WizFirstRunTab3">Database Path</system:String>
+    <system:String x:Key="WizFirstRunTab4">Superadmin Password</system:String>
+    <system:String x:Key="WizFirstRunTab5">Finish</system:String>
+    <system:String x:Key="WizFirstRunTab6">x</system:String>
+    <system:String x:Key="WizFirstRunTab7">x</system:String>
+    
+    <!-- 1 Welcometab -->
+    <system:String x:Key="WizFirstRunTab1Text1">Welcome to beRemote.</system:String>
+    <system:String x:Key="WizFirstRunTab1Text2">This is your first start of beRemote. In this wizard you have to configure your future use of beRemote.</system:String>
+
+    <!-- 2 Select mode -->
+    <system:String x:Key="WizFirstRunTab2Text1">Please select the future mode, you like to use.</system:String>
+    <system:String x:Key="WizFirstRunTab2ModeMu">Multi-User/Security (highest security, recommended)</system:String>
+    <system:String x:Key="WizFirstRunTab2ModeMuDescription">The Multi-User-Mode is for use with one or more users. This mode is recommended because everything is just accessable after you entered your password. It is not possible for anyone to access your stored credentials without your password you have to enter every time you login to beRemote.</system:String>
+    <system:String x:Key="WizFirstRunTab2ModeSu">Single-User (lowest security, autologin preconfigured)</system:String>
+    <system:String x:Key="WizFirstRunTab2ModeSuDescription">The Single-User-Mode is for use in a one-user-environment. It is not recommended to store any credentials in beRemote in this mode. beRemote uses a static password for your automatic login. This password is used to encrypt your stored credentials. Be sure, that you are the only one, who has access to your beRemote-Database and that you lock your Windows-Session everytime you leave your seat! We only recomment this mode, if you like to test beRemote or you don't want to store any credentials.</system:String>
+
+    <!-- 3 Database Path -->
+    <system:String x:Key="WizFirstRunTab3DatabaseType">Select your Database-Type:</system:String>
+    <system:String x:Key="WizFirstRunTab3PathDescription">Path to your Database-File:</system:String>
+    <system:String x:Key="WizFirstRunTab3Browse">Browse</system:String>
+
+    <!-- 4 Superadmin password -->
+    <system:String x:Key="WizFirstRunTab4SpecifySuperadmin">Define superadmin password:</system:String>
+    <system:String x:Key="WizFirstRunTab4SpecifySuperadminDescription">The superadmin is a system-user with all access-rights. For some actions like defining user-policies you have to use this administrator. This user is also able to access superadmin rights to other users. Choose a safty password, that you will allways remember.</system:String>
+    
+    <!-- 5 Finish -->
+    <system:String x:Key="WizFirstRunTab5Text">You're done. Click the Finish-Button to apply your settings.</system:String>
+    
+    <!-- Next/finish/back-->
+    <system:String x:Key="WizFirstRunNext">Next</system:String>
+    <system:String x:Key="WizFirstRunBack">Back</system:String>
+    <system:String x:Key="WizFirstRunFinish">Finish</system:String>
+    
+    <!-- Messages -->
+    <system:String x:Key="MsgSuperadminPasswordShortTitle">Password warning!</system:String>
+    <system:String x:Key="MsgSuperadminPasswordShortText">Please enter a longer superadmin-password.</system:String>
+    
+    
+    
+</ResourceDictionary>

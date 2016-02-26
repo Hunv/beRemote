@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleHelp">Help</system:String>
+
+    <system:String x:Key="TabHelpAutoLogon">You can start beRemote with some command line parameters. Below is a list of available parameters, which are available by default.</system:String>
+    <system:String x:Key="TabHelpCommandLineInterface">Command line interface</system:String>
+    
+</ResourceDictionary>

@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- Item Tooltips -->
+    <system:String x:Key="TvItemTooltipHost">Host: </system:String>
+    <system:String x:Key="TvItemTooltipDescription">Description:</system:String>
+    <system:String x:Key="TvItemTooltipCredentials">Credentialset: </system:String>
+    
+
+    <!-- Item Contextmenu -->
+    <system:String x:Key="TvItemContextMenuConnectionWithoutCredentials">Connect without Credentials</system:String>
+    <system:String x:Key="TvItemContextMenuAddFolder">Add Folder</system:String>
+    <system:String x:Key="TvItemContextMenuAddConnection">Add Connection</system:String>
+    <system:String x:Key="TvItemContextMenuRemove">Remove</system:String>
+    <system:String x:Key="TvItemContextMenuEdit">Edit</system:String>
+    <system:String x:Key="TvItemContextMenuSortUp">Sort Up</system:String>
+    <system:String x:Key="TvItemContextMenuSortDown">Sort Down</system:String>
+    <system:String x:Key="TvItemContextMenuAddToFavorites">Add to Favorites</system:String>
+    <system:String x:Key="TvItemContextMenuSetToDefaultProtocol">Set to default Protocol</system:String>
+    <system:String x:Key="TvItemContextMenuSetToDefaultFolder">Set to default Folder</system:String>
+</ResourceDictionary>

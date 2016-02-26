@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleManageFolder">Manage Folder</system:String>
+
+    <system:String x:Key="TabManageFolderFoldername">New folder name</system:String>
+    <system:String x:Key="TabManageFolderParentFolder">Parent folder</system:String>
+    <system:String x:Key="TabManageFolderPublic">Folder is public</system:String>
+    <system:String x:Key="TabManageFolderKeepOpen">Keep tab open after add</system:String>
+    <system:String x:Key="TabManageFolderIsRoot">Add to root</system:String>
+    
+</ResourceDictionary>

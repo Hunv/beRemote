@@ -1,0 +1,115 @@
+﻿<classes:TabBase x:Class="beRemote.VendorPlugins.SpellHelper.UI.SpellHelperControl"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                 xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+                 xmlns:local="clr-namespace:beRemote.VendorPlugins.SpellHelper.UI"        
+                 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                 mc:Ignorable="d" 
+                 d:DesignHeight="300" d:DesignWidth="300"
+                 IconSource="Images/spellhelper16.png"
+                 >
+    
+    <classes:TabBase.DataContext>
+        <local:ViewModel x:Name="viewModel" />
+    </classes:TabBase.DataContext>
+    
+    <classes:TabBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </classes:TabBase.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CmdLoaded, ElementName=viewModel}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <classes:TabBase.Header>
+        <StaticResource ResourceKey="TabPluginSpellHelperTitle"/>
+    </classes:TabBase.Header>
+
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="alternatingWithTriggers" TargetType="{x:Type ListBoxItem}">
+                <Style.Triggers>
+                    <Trigger Property="ListBox.AlternationIndex" Value="1">
+                        <Setter Property="Background" Value="LightBlue"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        
+        <TextBlock 
+            Text="{StaticResource TabPluginSpellSelectLanguage}" 
+            Margin="10,0,0,0" 
+            Height="20" 
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left" 
+            Width="230"
+            />
+        
+        <ComboBox 
+            Margin="10,20,0,0" 
+            Height="25"
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left"
+            Width="202"
+            ItemsSource="{Binding Dictionaries, ElementName=viewModel}"
+            SelectedValue="{Binding SelectedLanguage, ElementName=viewModel}"
+            SelectedValuePath="Value"
+            SelectedItem="{Binding SelectedLanguageItem, ElementName=viewModel}"
+            DisplayMemberPath="Key"
+            Name="cmbLanguage"
+            />
+
+        <ListBox Margin="10,50,10,10" 
+            ItemsSource="{Binding SelectedValue,ElementName=cmbLanguage}"
+            AlternationCount="2"
+            ItemContainerStyle="{StaticResource alternatingWithTriggers}"
+            >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition MinWidth="150" Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Letter}" Margin="2,0,2,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Word}" Margin="2,0,2,0"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Phonetic}" Margin="2,0,2,0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</classes:TabBase>

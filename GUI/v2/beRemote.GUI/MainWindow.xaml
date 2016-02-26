@@ -1,0 +1,1049 @@
+﻿ <Fluent:RibbonWindow 
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:beRemote.GUI.ViewModel"        
+        xmlns:conv="clr-namespace:beRemote.GUI.Converter"
+        xmlns:contrls="clr-namespace:beRemote.GUI.Controls;assembly=beRemote.GUI.Controls"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:command="clr-namespace:beRemote.GUI.ViewModel.Command"
+        xmlns:userOnline="clr-namespace:beRemote.GUI.StatusBar.UserOnline"
+        xmlns:firstRunWizard="clr-namespace:beRemote.GUI.Overlay.FirstRunWizard"
+        xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+        xmlns:vpn="clr-namespace:beRemote.Core.Common.Vpn;assembly=beRemote.Core.Common.Vpn"
+
+        x:Class="beRemote.GUI.MainWindow"
+        x:Name="beRemote"
+        Title="beRemote"        
+        MinWidth="400"
+        MinHeight="300"
+        MaxHeight="16000"
+        MaxWidth="16000"
+        Width="800"
+        Height="600"
+        WindowStartupLocation="CenterScreen"
+        WindowState="{Binding MainWindowState, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        Icon="/beRemote.GUI;component/Images/icon.ico"
+        
+        SizeChanged="beRemote_SizeChanged"
+        LocationChanged="beRemote_LocationChanged"
+        
+    >
+
+    <Fluent:RibbonWindow.DataContext>
+        <local:ViewModelMain x:Name="viewModel" />
+    </Fluent:RibbonWindow.DataContext>
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CmdMainWindowLoaded}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding CmdMainWindowClosing}" CommandParameter="{Binding ElementName=adMainDock}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Fluent:RibbonWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries >
+
+            <conv:InverseBooleanConverter x:Key="InverseBooleanConv"/>
+            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+            <conv:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConv"/>
+            <conv:QuickConnectConverter x:Key="QuickConnectConv"/>
+            <conv:PasswordChangeMultiConverter x:Key="PasswordChangeMultiConv"/>
+            <conv:IsZeroToVisibilityConverter x:Key="IsZeroToVisibilityConv"/>
+        </ResourceDictionary>
+    </Fluent:RibbonWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Ribbon -->
+            <RowDefinition Height="auto"/>
+            <!-- Content -->
+            <RowDefinition Height="*"/>
+            <!-- Statusbar -->
+            <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
+        
+        <!-- region First run wizard-->
+        <Grid Grid.RowSpan="3" Panel.ZIndex="1000" Margin="0,23,0,0" Visibility="{Binding ShowWizardFirstRun, Converter={StaticResource BoolToVisibilityConv}}">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.5">
+                    <GradientStop Color="#FF013A6A" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Border BorderThickness="1" BorderBrush="Black"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <firstRunWizard:OvFirstRunWizard>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="WizardFinished">
+                            <command:EventCommand CommandName="CmdFirstRunWizardFinishedImpl" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" Command="{Binding CmdFirstRunWizardFinished}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </firstRunWizard:OvFirstRunWizard>
+            </Border>
+        </Grid>
+        <!-- endregion -->
+        
+        <!-- Region Login Grid -->
+        <Grid Grid.RowSpan="3" Panel.ZIndex="1" Margin="0,23,0,0" Visibility="{Binding ShowLoginGrid, Converter={StaticResource BoolToVisibilityConv}}">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.5">
+                    <GradientStop Color="#FF013A6A" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Border BorderThickness="1" BorderBrush="Black"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <Grid Background="LightGray">
+                    <StackPanel Name="spLogin"
+                                Orientation="Vertical" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center" 
+                                Margin="20" 
+                                IsEnabled="{Binding LoginProcessing, Mode=OneWay, Converter={StaticResource InverseBooleanConv}}"
+                                FocusManager.FocusedElement="{Binding ElementName=pbLoginPassword}"
+                                >
+                        <TextBlock Text="{StaticResource LoginLblPleaseLogin}" Name="tbPleaseLogin" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,5"/>
+                        <Grid Margin="0,0,0,5">
+                            <TextBlock Text="{StaticResource LoginLblUsername}" Name="tbLoginUsername" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <TextBox Text="{Binding LoginUsername}" Width="130" Height="{Binding Height, ElementName=tbLoginUsername}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,0,0,0"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,5">
+                            <TextBlock Text="{StaticResource LoginLblPassword}" Name="tbLoginPassword" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <PasswordBox Width="130" Height="{Binding Height, ElementName=tbLoginPassword}" Name="pbLoginPassword" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,0,0,0"/>
+                        </Grid>
+
+                        <Button 
+                            Content="{StaticResource LoginBtnLogin}" 
+                            Command="{Binding CmdLogin}" 
+                            CommandParameter="{Binding ElementName=pbLoginPassword}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            IsDefault="True" 
+                            Width="200"  
+                            Margin="0,0,0,5"
+                            IsEnabled="{Binding UiLoginButtonEnabled}"
+                            />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Command="{Binding CmdLoginCancel}" Content="{StaticResource LoginBtnCancel}" IsCancel="True" Grid.Column="0"/>
+                            <Button Command="{Binding CmdCreateAccount}" Content="{StaticResource LoginBtnCreateAccount}" Grid.Column="2"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <Grid Name="grdChangePw"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center" 
+                                Margin="20" 
+                                Visibility="{Binding ShowChangePassword, Mode=OneWay, Converter={StaticResource BoolToVisibilityConv}}"
+                                Background="LightGray"
+                          >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.ColumnSpan="2">
+                            <Image Height="32" HorizontalAlignment="Left" Stretch="None" VerticalAlignment="Top" Width="32" Source="/beRemote.GUI;component/Images/warning32.png" />
+                            <TextBlock MaxWidth="250" Text="{StaticResource ChPwLblText}" VerticalAlignment="Top" TextWrapping="Wrap" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        
+                        <PasswordBox Grid.Column="1" Grid.Row="1" Name="pbOld" VerticalAlignment="Center" Width="120" />
+                        <PasswordBox Grid.Column="1" Grid.Row="2" Name="pbNew1" VerticalAlignment="Center" Width="120" />
+                        <PasswordBox Grid.Column="1" Grid.Row="3" Name="pbNew2" VerticalAlignment="Center" Width="120" />
+
+                        <Label Grid.Column="0" Grid.Row="1" Name="lblOldPw" Content="{StaticResource ChPwLblOldPassword}" />
+                        <Label Grid.Column="0" Grid.Row="2" Name="lblNewPw" Content="{StaticResource ChPwLblNewPassword}" />
+                        <Label Grid.Column="0" Grid.Row="3" Name="lblNewPwRep" Content="{StaticResource ChPwLblNewPasswordRepeat}" />
+
+                        <Button Grid.Column="0" Grid.Row="4" 
+                                Margin="0,0,1,0" 
+                                Content="{StaticResource ChPwBtnSave}" 
+                                Height="23" 
+                                HorizontalAlignment="Right" 
+                                Name="btnSave" 
+                                VerticalAlignment="Top" 
+                                Width="100" 
+                                IsDefault="True"
+                                Command="{Binding CmdChPwSave}"
+                                >
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource PasswordChangeMultiConv}">
+                                    <Binding Path="SecurePassword" ElementName="pbOld"/>
+                                    <Binding Path="SecurePassword" ElementName="pbNew1"/>
+                                    <Binding Path="SecurePassword" ElementName="pbNew2"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
+                        <Button Grid.Column="1" Grid.Row="4" Margin="1,0,0,0" Content="{StaticResource ChPwBtnCancel}" Height="23" HorizontalAlignment="Left" Name="btnCancel" VerticalAlignment="Top" Width="100" IsCancel="True" />
+                    </Grid>
+
+                    <Grid Name="grdCreateAccount" Background="LightGray" Visibility="{Binding ShowCreateAccount, Mode=OneWay, Converter={StaticResource BoolToVisibilityConv}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{StaticResource CreateAccountLblText}" Margin="2,2,2,2" TextWrapping="Wrap"/>
+
+                        <Label Grid.Column="0" Grid.Row="2" Content="{StaticResource CreateAccountLblUsername}"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Height="21" Name="txtCreateAccountUsername" Text="{Binding CreateAccountUsername}"/>
+
+                        <Label Grid.Column="0" Grid.Row="3" Content="{StaticResource CreateAccountLblDisplayname}"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Height="21" Name="txtCreateAccountDisplayname" Text="{Binding CreateAccountDisplayname}"/>
+
+                        <Label Grid.Column="0" Grid.Row="4" Content="{StaticResource CreateAccountLblPassword}"/>
+                        <PasswordBox Grid.Column="1" Grid.Row="4" Height="21" Name="pbCreateAccountPassword" PasswordChanged="pbCreateAccountPassword_PasswordChanged"/>
+                        
+                        <Label Grid.Column="0" Grid.Row="5" Content="{StaticResource CreateAccountLblPassword2}"/>
+                        <PasswordBox Grid.Column="1" Grid.Row="5" Height="21" Name="pbCreateAccountPassword2" PasswordChanged="pbCreateAccountPassword2_PasswordChanged"/>
+
+                        <Button Grid.Column="0" Grid.Row="6" Content="{StaticResource CreateAccountBtnSave}" 
+                                Width="100" HorizontalAlignment="Right" Margin="0,0,1,0"
+                                Command="{Binding CmdCreateAccountSave}"/>
+                                
+                        <Button Grid.Column="1" Grid.Row="6" Content="{StaticResource CreateAccountBtnCancel}" 
+                                Width="100" HorizontalAlignment="Left" Margin="1,0,0,0"
+                                Command="{Binding CmdCreateAccountCancel}"/>
+                    </Grid>
+                    
+                    <Grid Background="LightGray" Opacity="0.8" Visibility="Collapsed">
+                        <contrls:LoadingCircle VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <!-- Endregion -->
+
+        <Fluent:Ribbon
+            Grid.Row="0"
+            IsMinimized="{Binding IsRibbonMinimized, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            SelectedTabIndex="{Binding SelectedRibbonIndex, Mode=TwoWay}"
+            IsEnabled="{Binding IsUserLoggedIn}"            
+            >
+            <!-- Colored ContextTabGroups Definitions -->
+            <Fluent:Ribbon.ContextualGroups>
+                <Fluent:RibbonContextualTabGroup
+                    x:Name="tabGroupFilter"
+                    BorderBrush="Magenta"
+                    Background="Magenta"
+                    Foreground="Purple"
+                    Header="{StaticResource RibTabHeadFilter}"
+                    Visibility="{Binding IsContextRibbonFilterVisible, Converter={StaticResource BoolToVisibilityConv}}"
+                    />
+                <Fluent:RibbonContextualTabGroup
+                    x:Name="tabGroupVpn"
+                    BorderBrush="DarkGreen"
+                    Background="LightGreen"
+                    Foreground="Green"
+                    Header="{StaticResource RibTabHeadVpn}"
+                    Visibility="{Binding IsContextRibbonVpnVisible, Converter={StaticResource BoolToVisibilityConv}}"
+                    />
+            </Fluent:Ribbon.ContextualGroups>
+            
+            <!-- Menu -->
+            <Fluent:Ribbon.Menu>
+                <Grid>
+                    <Fluent:Backstage Visibility="{Binding IsChecked, ElementName=UseBackstage, Converter={StaticResource BoolToVisibilityConv}}">
+                        <Fluent:BackstageTabControl>
+                            <Fluent:Button Header="{StaticResource RibMenuBtnEdit}"
+                                           Icon="/beRemote.GUI;component/Images/usergreen_edit32.png"
+                                           KeyTipService.KeyTip="S"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnEdit"
+                                           />
+                            <Fluent:Button Header="{StaticResource RibMenuBtnFavorites}"
+                                           Icon="/beRemote.GUI;component/Images/star_32.png"
+                                           KeyTipService.KeyTip="F"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnFavorites"
+                                           />
+                            <Fluent:Button Header="{StaticResource RibMenuBtnFiltersets}"
+                                           Icon="/beRemote.GUI;component/Images/filter_32.png"
+                                           KeyTipService.KeyTip="L"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnFiltersets"
+                                           />
+                            <!--<Fluent:SeparatorTabItem/>-->
+                            <Fluent:Button Header="{StaticResource RibMenuBtnConnections}"
+                                           Icon="/beRemote.GUI;component/Images/import32.png"
+                                           KeyTipService.KeyTip="I"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnConnections"
+                                           />
+                            <!--<Fluent:SeparatorTabItem Visibility="{Binding IsUserSuperadmin, Converter={StaticResource BoolToVisibilityConv}}"/>-->
+                            <Fluent:Button Header="{StaticResource RibMenuBtnManageUser}"
+                                           Icon="/beRemote.GUI;component/Images/user_group32.png"
+                                           KeyTipService.KeyTip="U"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnManageUser"
+                                           Visibility="{Binding IsUserSuperadmin, Converter={StaticResource BoolToVisibilityConv}}"
+                                           />
+                            <Fluent:Button Header="{StaticResource RibMenuBtnSuperadminTools}"
+                                           Icon="/beRemote.GUI;component/Images/settings32.png"
+                                           KeyTipService.KeyTip="S"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnSuperadminTools"
+                                           Visibility="{Binding IsUserSuperadmin, Converter={StaticResource BoolToVisibilityConv}}"
+                                           />
+                            <Fluent:Button Header="{StaticResource RibMenuBtnDatabaseManager}"
+                                           Icon="/beRemote.GUI;component/Images/database32.png"
+                                           KeyTipService.KeyTip="D"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnDatabaseManager"
+                                           Visibility="{Binding IsUserSuperadmin, Converter={StaticResource BoolToVisibilityConv}}"
+                                           />
+                            <Fluent:Button Header="{StaticResource RibMenuBtnTestTab}"
+                                           Icon="/beRemote.GUI;component/Images/blueball_32.png"
+                                           KeyTipService.KeyTip="T"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnTestTab"
+                                           Visibility="{Binding IsUserSuperadmin, Converter={StaticResource BoolToVisibilityConv}}"
+                                           />
+                            <!--<Fluent:SeparatorTabItem/>-->
+                            <Fluent:Button Header="{StaticResource RibMenuClose}"
+                                           Icon="/beRemote.GUI;component/Images/close32.png"
+                                           KeyTipService.KeyTip="X"
+                                           Command="{Binding CmdMainWindowClose}"
+                                           CommandParameter="{Binding ElementName=beRemote}"
+                                           />
+                        </Fluent:BackstageTabControl>
+                    </Fluent:Backstage>
+                </Grid>
+            </Fluent:Ribbon.Menu>
+                        
+            <!-- Server Tab -->
+            <Fluent:RibbonTabItem
+                Header="{StaticResource RibTabHeadServer}"                
+                KeyTipService.KeyTip="S"
+                >
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibServerGrpConnections}"
+                    >
+                    <Fluent:SplitButton
+                        Header="{StaticResource RibServerBtnAdd}"
+                        LargeIcon="/beRemote.GUI;component/Images/greenplus32.png"
+                        Icon="/beRemote.GUI;component/Images/greenplus16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnAdd"
+                        KeyTipService.KeyTip="A"
+                        ItemsSource="{Binding ProtocolList}"
+                        >
+                        <Fluent:SplitButton.ItemContainerStyle>
+                            <Style TargetType="MenuItem" >
+                                <Setter Property="Command" Value="{Binding DataContext.CmdAddConnection, RelativeSource={RelativeSource AncestorType={x:Type Fluent:SplitButton}}}"/>
+                                <Setter Property="CommandParameter" Value="{Binding ProtocolIdentifier}"/>
+                            </Style>
+                        </Fluent:SplitButton.ItemContainerStyle>
+                        <Fluent:SplitButton.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="4"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="{Binding ProtocolIconSmall}"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding ProtocolName}"/>
+                                </Grid>                                
+                            </DataTemplate>
+                        </Fluent:SplitButton.ItemTemplate>
+                    </Fluent:SplitButton>
+
+                    <Fluent:Button 
+                        Header="{StaticResource RibServerBtnRemove}"
+                        Icon="/beRemote.GUI;component/Images/redcross16.png"
+                        Command="{Binding CmdDeleteItem}"
+                        CommandParameter="{Binding ContextItem, ElementName=tvConList}"
+                        KeyTipService.KeyTip="D"
+                        SizeDefinition="Middle"
+                        />
+
+                    <Fluent:Button 
+                        Header="{StaticResource RibServerBtnAddFolder}"
+                        Icon="/beRemote.GUI;component/Images/folderadd16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnAddFolder"
+                        KeyTipService.KeyTip="F"
+                        SizeDefinition="Middle"
+                        />
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibServerGrpManage}"
+                    >
+
+                    <Fluent:Button 
+                        Header="{StaticResource RibServerBtnCredentials}"
+                        Icon="/beRemote.GUI;component/Images/key16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/key32.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnCredentials"
+                        KeyTipService.KeyTip="C"
+                        />
+
+                    <Fluent:Button 
+                        Header="{StaticResource RibServerBtnVpn}"
+                        Icon="/beRemote.GUI;component/Images/vpn_16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/vpn_32.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnVpn"
+                        KeyTipService.KeyTip="V"
+                        />
+
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibServerGrpMore}"
+                    >
+                    <Fluent:Button  
+                        Header="{StaticResource RibServerBtnHistory}" 
+                        LargeIcon="/beRemote.GUI;component/Images/history32.png"
+                        Icon="/beRemote.GUI;component/Images/history16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnHistory"
+                        KeyTipService.KeyTip="H"
+                        />
+
+                    <Fluent:Button  
+                        Header="{StaticResource RibServerBtnWhoIsOnline}" 
+                        LargeIcon="/beRemote.GUI;component/Images/user_group32.png"
+                        Icon="/beRemote.GUI;component/Images/user_group16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnWhoIsOnline"
+                        KeyTipService.KeyTip="W"
+                        />
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibServerGrpFavorites}"
+                    ItemsSource="{Binding FavoriteButtons}"
+                    >
+                    <Fluent:RibbonGroupBox.ItemTemplate>
+                        <DataTemplate>
+                            <Fluent:Button 
+                                Header="{Binding FavItemHost.Name}"
+                                Icon="{Binding FavIconSmall}"
+                                LargeIcon="{Binding FavIconLarge}"
+                                Command="{Binding CmdFavoriteClicked, ElementName=viewModel}"
+                                CommandParameter="{Binding}"
+                                KeyTipService.KeyTip="L"
+                                >
+                            </Fluent:Button>
+                        </DataTemplate>
+                    </Fluent:RibbonGroupBox.ItemTemplate>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            
+            <!-- Plugin-Tab -->
+            <Fluent:RibbonTabItem
+                Header="{StaticResource RibTabHeadToolsAndFeatures}"
+                KeyTipService.KeyTip="T"
+                >
+                <Fluent:RibbonGroupBox 
+                    Header="{StaticResource RibTafGrpTools}" 
+                    ItemsSource="{Binding ToolsAndFeatures}"
+                    >
+                    <Fluent:RibbonGroupBox.ItemTemplate>
+                        <DataTemplate>
+                            <Fluent:Button
+                                Header="{Binding MetaData.PluginName}"
+                                Icon="{Binding ButtonIcon}"
+                                LargeIcon="{Binding ButtonIcon}"
+                                Tag="{Binding uiPlugin.MetaData.PluginFullQualifiedName}"
+                                Command="{Binding CmdPluginButton, ElementName=viewModel}"
+                                CommandParameter="{Binding}"
+                                KeyTipService.KeyTip="P"
+                                />
+                        </DataTemplate>
+                    </Fluent:RibbonGroupBox.ItemTemplate>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            
+            <!-- Help-Tab -->
+            <Fluent:RibbonTabItem
+                Header="{StaticResource RibTabHeadHelp}"
+                KeyTipService.KeyTip="H"
+                >
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibHelpGrpHelp}"
+                    >
+                    <Fluent:Button
+                        Header="{StaticResource RibHelpBtnHelp}"
+                        Icon="/beRemote.GUI;component/Images/question16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/question32.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibHelpBtnHelp"
+                        KeyTipService.KeyTip="H"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibHelpBtnCommunity}"
+                        Icon="/beRemote.GUI;component/Images/user_group216.png"
+                        LargeIcon="/beRemote.GUI;component/Images/user_group232.png"
+                        Command="{Binding CmdRibBtnClick, ElementName=viewModel}"
+                        CommandParameter="RibHelpBtnCommunity"
+                        KeyTipService.KeyTip="C"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibHelpBtnAbout}"
+                        Icon="/beRemote.GUI;component/Images/infobubble16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/infobubble32.png"
+                        Command="{Binding CmdRibBtnClick, ElementName=viewModel}"
+                        CommandParameter="RibHelpBtnAbout"
+                        KeyTipService.KeyTip="A"
+                        />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            
+            <!-- Filter-Context-Tab -->
+            <Fluent:RibbonTabItem
+                Header="{StaticResource RibTabHeadFilter}"
+                KeyTipService.KeyTip="F"
+                Group="{Binding ElementName=tabGroupFilter, Mode=OneWay}"
+                IsSelected="{Binding IsContextRibbonFilterSelected}"
+                >
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibFilterGrpAddCondition}"
+                    >
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnName}"
+                        Icon="/beRemote.GUI;component/Images/name16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/name32.png"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="1"
+                        KeyTipService.KeyTip="N"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnHost}"
+                        Icon="/beRemote.GUI;component/Images/host16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/host32.png"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="2"
+                        KeyTipService.KeyTip="H"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnOperationSystem}"
+                        Icon="/beRemote.GUI;component/Images/operatingsystem16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/operatingsystem32.png"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="4"
+                        KeyTipService.KeyTip="O"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnDescription}"
+                        Icon="/beRemote.GUI;component/Images/description16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="3"
+                        KeyTipService.KeyTip="D"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnFolder}"
+                        Icon="/beRemote.GUI;component/Images/folder16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="5"
+                        KeyTipService.KeyTip="F"
+                        />
+                    <!--<Fluent:Button
+                        Header="{StaticResource RibFilterBtnProtocol}"
+                        Icon="/beRemote.GUI;component/Images/protocol16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="6"
+                        KeyTipService.KeyTip="P"
+                        />-->
+                    <!--<Fluent:Button
+                        Header="{StaticResource RibFilterBtnProtocolsetting}"
+                        Icon="/beRemote.GUI;component/Images/protocolsetting16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="10"
+                        KeyTipService.KeyTip="S"
+                        />-->
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnCredentials}"
+                        Icon="/beRemote.GUI;component/Images/key16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="7"
+                        KeyTipService.KeyTip="C"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnPort}"
+                        Icon="/beRemote.GUI;component/Images/port16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="9"
+                        KeyTipService.KeyTip="O"
+                        />
+                    <!--<Fluent:Button
+                        Header="{StaticResource RibFilterBtnConnection}"
+                        Icon="/beRemote.GUI;component/Images/connection16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="11"
+                        KeyTipService.KeyTip="V"
+                        />-->
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnPublic}"
+                        Icon="/beRemote.GUI;component/Images/user_group16.png"
+                        SizeDefinition="middle"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="8"
+                        KeyTipService.KeyTip="U"
+                        />
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibFilterGrpAdvanced}"
+                    >
+                    <Fluent:Button
+                        Header="{StaticResource RibFilterBtnAddCollection}"
+                        Icon="/beRemote.GUI;component/Images/collection16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/collection32.png"
+                        Command="{Binding CmdAddFilter}"
+                        CommandParameter="1200"
+                        KeyTipService.KeyTip="L"
+                        />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <!-- VPN-Context-Tab -->
+            <Fluent:RibbonTabItem
+                Header="{StaticResource RibTabHeadVpn}"
+                KeyTipService.KeyTip="V"
+                Group="{Binding ElementName=tabGroupVpn, Mode=OneWay}"
+                IsSelected="{Binding IsContextRibbonVpnSelected}"
+                >
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibGrpVpnManage}"
+                    >
+                    <Fluent:SplitButton
+                        Header="{StaticResource RibVpnAdd}"
+                        LargeIcon="/beRemote.GUI;component/Images/greenplus32.png"
+                        Icon="/beRemote.GUI;component/Images/greenplus16.png"
+                        Command="{Binding CmdAddVpn}"
+                        CommandParameter="0"
+                        KeyTipService.KeyTip="A"
+                        >
+                        <Fluent:MenuItem 
+                            Header="Windows VPN"
+                            Command="{Binding CmdAddVpn}"
+                            CommandParameter="3"
+                            KeyTipService.KeyTip="W"
+                            />
+                        <Fluent:MenuItem 
+                            Header="Open VPN"
+                            Command="{Binding CmdAddVpn}"
+                            CommandParameter="2"
+                            KeyTipService.KeyTip="O"
+                            />
+                        <Fluent:MenuItem 
+                            Header="Cisco VPN"
+                            Command="{Binding CmdAddVpn}"
+                            CommandParameter="1"
+                            KeyTipService.KeyTip="C"
+                            />
+                        <Fluent:MenuItem 
+                            Header="ShrewSoft VPN"
+                            Command="{Binding CmdAddVpn}"
+                            CommandParameter="4"
+                            KeyTipService.KeyTip="S"
+                            />
+                    </Fluent:SplitButton>
+                    <Fluent:Button
+                        Header="{StaticResource RibVpnRemove}"
+                        Icon="/beRemote.GUI;component/Images/redcross16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/redcross32.png"
+                        Command="{Binding CmdRemoveVpn}"
+                        CommandParameter="1"
+                        KeyTipService.KeyTip="R"
+                        />
+                    <Fluent:Button
+                        Header="{StaticResource RibVpnTest}"
+                        Icon="/beRemote.GUI;component/Images/checklist_16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/checklist_32.png"
+                        Command="{Binding CmdTestVpn}"
+                        CommandParameter="1"
+                        KeyTipService.KeyTip="T"
+                        />
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{StaticResource RibGrpVpnSave}"
+                    >
+                    <Fluent:Button
+                        Header="{StaticResource RibVpnSaveChanges}"
+                        Icon="/beRemote.GUI;component/Images/save_16.png"
+                        LargeIcon="/beRemote.GUI;component/Images/save_32.png"
+                        Command="{Binding CmdSaveVpn}"
+                        CommandParameter="1"
+                        KeyTipService.KeyTip="S"
+                        />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+        </Fluent:Ribbon>        
+
+        <Image 
+            Source="{Binding RibbonWatermark, ElementName=viewModel}"
+            Grid.Row="0" 
+            Opacity="{Binding RibbonWatermarkOpacity, ElementName=viewModel}" 
+            IsHitTestVisible="False" 
+            HorizontalAlignment="Right"             
+            Margin="0,50,10,0" 
+            Visibility="{Binding IsRibbonMinimized, Converter={StaticResource InverseBoolToVisibilityConv}}"
+            Stretch="None"
+            />
+
+        <xcad:DockingManager 
+            Grid.Row="1" 
+            DocumentsSource="{Binding ContentTabs}" 
+            Name="adMainDock" 
+            ActiveContent="{Binding ActiveDocument, Mode=TwoWay}"            
+            >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="DocumentClosed">
+                    <!--<i:InvokeCommandAction Command="{Binding CmdTabClose}" />-->
+                    <command:EventCommand CommandName="CmdTabClose" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" Command="{Binding CmdTabClose}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <xcad:DockingManager.DocumentHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
+                        <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
+                        <TextBlock Text="{Binding Title}" Margin="0,1,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </xcad:DockingManager.DocumentHeaderTemplate>
+            <xcad:DockingManager.AnchorableHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
+                        <TextBlock Text="{Binding Title}" Margin="0,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </xcad:DockingManager.AnchorableHeaderTemplate>
+            
+            <!-- The Content of the Tab -->
+            <xcad:DockingManager.LayoutItemTemplateSelector>
+                <local:PanesTemplateSelector>
+                    <local:PanesTemplateSelector.ViewModelGeneralTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding Content}" />
+                        </DataTemplate>
+                    </local:PanesTemplateSelector.ViewModelGeneralTemplate>
+                </local:PanesTemplateSelector>
+            </xcad:DockingManager.LayoutItemTemplateSelector>
+            
+            <!-- The Non-Content Properties of the Tab -->
+            <xcad:DockingManager.LayoutItemContainerStyleSelector>
+                <local:PanesStyleSelector>
+                    <local:PanesStyleSelector.GeneralStyle>
+                        <Style TargetType="{x:Type xcad:LayoutItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title}"/>
+                            <Setter Property="IconSource" Value="{Binding Model.IconSource}"/>
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                            <Setter Property="CloseCommand" Value="{Binding DataContext.CmdTabClose, RelativeSource={RelativeSource AncestorType={x:Type xcad:DockingManager}}}"/>
+                            <!--<Setter Property="ToolTip" Value="{Binding Model.Title}"/>-->
+                        </Style>
+                    </local:PanesStyleSelector.GeneralStyle>
+                </local:PanesStyleSelector>
+            </xcad:DockingManager.LayoutItemContainerStyleSelector>
+
+            <xcad:DockingManager.LayoutUpdateStrategy>
+                <local:LayoutInitializer/>
+            </xcad:DockingManager.LayoutUpdateStrategy>
+
+
+            <xcad:LayoutRoot>
+                <xcad:LayoutPanel Orientation="Horizontal">
+                    <xcad:LayoutAnchorablePaneGroup DockWidth="150">
+                        <xcad:LayoutAnchorablePane>
+                            <xcad:LayoutAnchorable Title="{StaticResource TabTitleConnections}" ContentId="tacConnections" CanClose="False">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="50"/>
+                                    </Grid.RowDefinitions>
+
+                                    <contrls:beTreeView 
+                                        Name="tvConList" 
+                                        Grid.Row="0"            
+                                        Items="{Binding ConnectionViewItems}"
+                                        State="{Binding ConnectionViewItemsExpanded, Mode=TwoWay}"
+                                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                        ScrollViewer.HorizontalScrollBarVisibility="Visible"                                        
+                                        >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="DoubleClickItemTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdConTreeDoubleClickItem}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="ConnectWithoutCredentialsTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdConnectWithoutCredentials}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="AddConnectionTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdAddConnection}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="AddFavoritesItemTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdAddFavoritesItem}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="AddFolderTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdAddFolder}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="DeleteItemTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdDeleteItem}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="EditItemTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdEditItem}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="SortDownItemTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdSortItemDown}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="SortUpItemTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdSortItemUp}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="DragDropMoved">
+                                                <command:EventCommand CommandName="CmdConTreeDragDropMovedImpl" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}" Command="{Binding CmdConTreeDragDropMoved}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="SetDefaultFolderTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdSetDefaultFolder}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="SetDefaultProtocolItemTriggered">
+                                                <i:InvokeCommandAction Command="{Binding CmdSetDefaultProtocol}" CommandParameter="{Binding ContextItem, ElementName=tvConList}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </contrls:beTreeView>
+                                    
+                                    <ComboBox 
+                                        ItemsSource="{Binding ConnectionFilterList}"
+                                        SelectedItem="{Binding ConnectionFilterSelected}"
+                                        Grid.Row="1"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Top"
+                                        DisplayMemberPath="Title"
+                                        Name="cmbFilter"
+                                        >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding CmdConnectionFilterChanged}" CommandParameter="{Binding SelectedItem, ElementName=cmbFilter}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ComboBox>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <TextBox
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Name="txtQuickConnect"
+                                            Text="{Binding QuickConnectText, Mode=TwoWay}"
+                                            Height="23"
+                                            VerticalContentAlignment="Center"
+                                            >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="KeyUp">
+                                                    <command:EventCommand 
+                                                        CommandName="CmdQuickConnectImpl" 
+                                                        Command="{Binding CmdQuickConnect, ElementName=viewModel}"
+                                                        >
+                                                        <command:EventCommand.CommandParameter>
+                                                            <MultiBinding Converter="{StaticResource QuickConnectConv}">
+                                                                <MultiBinding.Bindings>
+                                                                    <Binding Path="SelectedValue" ElementName="cmbQuickConnect"/>
+                                                                    <Binding Path="Text" ElementName="txtQuickConnect"/>
+                                                                    <Binding RelativeSource="{RelativeSource Self}" Path="InvokeParameter"/>
+                                                                </MultiBinding.Bindings>
+                                                            </MultiBinding>
+                                                        </command:EventCommand.CommandParameter>
+                                                    </command:EventCommand>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </TextBox>
+                                        <Border 
+                                            BorderBrush="{x:Null}"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Name="lblQuickConnect"
+                                            Height="23"
+                                            >
+                                            <TextBlock
+                                                Text="{StaticResource TxtQuickConnect}"
+                                                Visibility="{Binding Text.Length, ElementName=txtQuickConnect, Converter={StaticResource IsZeroToVisibilityConv}}"
+                                                IsHitTestVisible="False"
+                                                Background="Transparent"
+                                                VerticalAlignment="Center"
+                                                Foreground="Gray"
+                                                Margin="5,0,5,0"
+                                            />
+                                        </Border>
+
+                                        <ComboBox 
+                                            Grid.Column="1" 
+                                            ItemsSource="{Binding ProtocolList}"
+                                            TextSearch.TextPath="ProtocolName"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Height="23"
+                                            Name="cmbQuickConnect"
+                                            >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="16"/>
+                                                            <ColumnDefinition Width="4"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image Grid.Column="0" Source="{Binding ProtocolIconSmall}"/>
+                                                        <TextBlock Grid.Column="2" Text="{Binding ProtocolName}"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="KeyUp">
+                                                    <command:EventCommand 
+                                                        CommandName="CmdQuickConnectImpl" 
+                                                        Command="{Binding CmdQuickConnect, ElementName=viewModel}"
+                                                        >
+                                                        <!--CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}"-->
+                                                        <command:EventCommand.CommandParameter>
+                                                            <MultiBinding Converter="{StaticResource QuickConnectConv}">
+                                                                <MultiBinding.Bindings>
+                                                                    <Binding Path="SelectedValue" ElementName="cmbQuickConnect"/>
+                                                                    <Binding Path="Text" ElementName="txtQuickConnect"/>
+                                                                    <Binding RelativeSource="{RelativeSource Self}" Path="InvokeParameter"/>
+                                                                </MultiBinding.Bindings>
+                                                            </MultiBinding>
+                                                        </command:EventCommand.CommandParameter>
+                                                    </command:EventCommand>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBox>
+                                    </Grid>
+                                </Grid>
+                            </xcad:LayoutAnchorable>
+                            <xcad:LayoutAnchorable Title="{StaticResource TabTitleHistory}" ContentId="tabHistory" CanClose="False">
+                                <DataGrid 
+                                    CanUserAddRows="False" 
+                                    CanUserDeleteRows="False"
+                                    CanUserReorderColumns="False"
+                                    CanUserResizeColumns="False"
+                                    CanUserResizeRows="False"
+                                    CanUserSortColumns="False"
+                                    SelectedValuePath="conId"
+                                    AutoGenerateColumns="False"
+                                    ItemsSource="{Binding ConnectionHistory}"
+                                    AreRowDetailsFrozen="True"
+                                    AlternationCount="2"
+                                    GridLinesVisibility="None"
+                                    AlternatingRowBackground="#0F0000FF" 
+                                    HeadersVisibility="None"
+                                    ColumnWidth="SizeToCells"
+                                    SelectionUnit="FullRow"
+                                    SelectionMode="Single"
+                                    >
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding Image}" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="" Binding="{Binding Host}" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                    <DataGrid.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                        </Style>
+                                    </DataGrid.CellStyle>
+                                </DataGrid>
+                            </xcad:LayoutAnchorable>
+                        </xcad:LayoutAnchorablePane>
+                    </xcad:LayoutAnchorablePaneGroup>
+                    <xcad:LayoutDocumentPaneGroup DockWidth="*">
+                        <xcad:LayoutDocumentPane>
+                            <!-- Content here -->
+                            <!--
+                            <xcad:LayoutAnchorable Title="LayoutAnchorable3">                                
+                            </xcad:LayoutAnchorable> 
+                            -->
+                        </xcad:LayoutDocumentPane>
+                    </xcad:LayoutDocumentPaneGroup>
+                </xcad:LayoutPanel>
+            </xcad:LayoutRoot>
+        </xcad:DockingManager>
+
+        <StatusBar Grid.Row="2" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+            <!-- User-Icon-Button with directlink to Userprofile -->
+            <userOnline:SbUserOnline UserName="{Binding LoginUsername}" /> <!-- Use property UserCount to show current usercount for future use -->
+            
+            <!-- The dynamic StatusBarElements-->
+            <StackPanel Orientation="Horizontal">
+                <ItemsControl ItemsSource="{Binding StatusBarElements}" Height="20">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <UserControl Content="{Binding Element}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </StatusBar>
+
+    </Grid>
+</Fluent:RibbonWindow>

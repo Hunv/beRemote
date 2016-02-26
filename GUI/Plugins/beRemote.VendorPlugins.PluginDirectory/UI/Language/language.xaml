@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- TabTitle -->
+    <system:String x:Key="TabDirectoryServiceTitle">Plugin Directory</system:String>
+
+    <system:String x:Key="TabDirectoryServiceShowInstalled">Show installed</system:String>
+
+    <system:String x:Key="TabDirectoryServiceRefreshData">Refresh Data</system:String>
+    <system:String x:Key="TabDirectoryServiceInstallPlugin">Install plugin</system:String>
+    <system:String x:Key="TabDirectoryServiceUninstallPlugin">Uninstall plugin</system:String>
+    <system:String x:Key="TabDirectoryServiceUpdatePlugin">Update plugin</system:String>
+    <system:String x:Key="TabDirectoryServiceCloseDetailView">Close detail view</system:String>
+    <system:String x:Key="TabDirectoryServiceFilter">Filter</system:String>
+    <system:String x:Key="TabDirectoryServiceName">Name</system:String>
+    <system:String x:Key="TabDirectoryServiceInstalled">Installed</system:String>
+    <system:String x:Key="TabDirectoryServiceUpdateAvailable">Update available</system:String>
+
+
+</ResourceDictionary>

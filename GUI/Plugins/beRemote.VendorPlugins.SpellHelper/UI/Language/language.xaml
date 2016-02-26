@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- TabTitle -->
+    <system:String x:Key="TabPluginSpellHelperTitle">Spell Helper</system:String>
+
+    <system:String x:Key="TabPluginSpellSelectLanguage">Select Languageset</system:String>
+
+</ResourceDictionary>

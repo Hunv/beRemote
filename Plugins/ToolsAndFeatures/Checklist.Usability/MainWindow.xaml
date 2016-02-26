@@ -1,0 +1,23 @@
+﻿<Window x:Class="Checklist.Usability.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctr="clr-namespace:Checklist.Usability.Controls"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel>
+            <ctr:TextInputControl DisplayText="Enter Machinename" />
+            <ctr:CheckControl DisplayText="Start System"/>
+            <ctr:MultipleChoiseControl DisplayText="Select OS" ChoiseList="{Binding ChoiseList}"/>
+
+            <StackPanel>
+                <!-- Windows -->
+                <ctr:ActionControl DisplayText="Connect using RDP"/>
+                <ctr:CheckControl DisplayText="Press Ctrl+Alt+Del and login"/>
+                <ctr:CheckControl DisplayText="Open CMD"/>
+                <ctr:CheckControl DisplayText="Enter ipconfig"/>
+                <ctr:TextInputControl DisplayText="Enter IPv4-Address" />
+                <ctr:CheckControl DisplayText="Shutdown System"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

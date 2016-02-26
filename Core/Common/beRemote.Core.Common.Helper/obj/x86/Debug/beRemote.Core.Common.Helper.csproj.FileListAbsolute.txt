@@ -1,0 +1,5 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.Helper.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.Helper.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.Helper\obj\x86\Debug\beRemote.Core.Common.Helper.csprojResolveAssemblyReference.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.Helper\obj\x86\Debug\beRemote.Core.Common.Helper.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.Helper\obj\x86\Debug\beRemote.Core.Common.Helper.pdb

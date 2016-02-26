@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="beRemote.GUI.Controls.ImagedConnectionTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             xmlns:my="clr-namespace:beRemote.GUI.Controls"
+             xmlns:myClasses="clr-namespace:beRemote.GUI.Controls.Classes"
+             mc:Ignorable="d"              
+             d:DesignHeight="300" d:DesignWidth="300" 
+             PreviewKeyDown="UserControl_PreviewKeyDown"
+             Loaded="UserControl_Loaded"        
+             >
+
+    <Control.CommandBindings>
+        <CommandBinding Command="my:ImagedConnectionTreeView.DeleteEntry" Executed="tvDeleteEntryExecute" CanExecute="tvDeleteEntryCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.AddFolder" Executed="tvAddFolderExecute" CanExecute="tvAddFolderCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.AddSetting" Executed="tvAddSettingExecute" CanExecute="tvAddSettingCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.EditSetting" Executed="tvEditSettingExecute" CanExecute="tvEditSettingCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.SetDefaultFolder" Executed="tvSetDefaultFolderExecute" CanExecute="tvSetDefaultFolderCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.SetDefaultProtocol" Executed="tvSetDefaultProtocolExecute" CanExecute="tvSetDefaultProtocolCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.Connect" Executed="tvConnectExecute" CanExecute="tvConnectCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.SortUp" Executed="tvSortUpExecute" CanExecute="tvSortUpCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.SortDown" Executed="tvSortDownExecute" CanExecute="tvSortDownCanExecute" />
+        <CommandBinding Command="my:ImagedConnectionTreeView.QuickConnectAdd" Executed="tvQuickConnectAddExecute" CanExecute="tvQuickConnectAddCanExecute" />        
+    </Control.CommandBindings>
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer Name="svScroll" HorizontalScrollBarVisibility="Visible"  VerticalScrollBarVisibility="Auto">
+            <my:ImagedConnectionTreeViewControl Background="#FFFFFFFF" Foreground="#FFFFFFFF" Margin="0,-2,0,0" x:Name="tvConnectionList" BorderThickness="0" SelectedItemChanged="tvConnectionList_SelectedItemChanged" AllowDrop="True" PreviewMouseWheel="tvConnectionList_MouseWheel">
+                <TreeView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="my:ImagedConnectionTreeView.AddFolder" Header="Add Folder" IsEnabled="True">
+                            <MenuItem.Icon>
+                                <Image Source="/beRemote.GUI.Controls;component/Images/folderadd16.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="my:ImagedConnectionTreeView.AddSetting" Header="Add Connection" IsEnabled="True">
+                            <MenuItem.Icon>
+                                <Image Source="/beRemote.GUI.Controls;component/Images/screenadd16.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </TreeView.ContextMenu>
+                <TreeView.Resources>
+                    <Style TargetType="{x:Type myClasses:ImagedConnectionTreeViewItem}">
+                        <Setter Property="HeaderedItemsControl.HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type myClasses:ImagedConnectionTreeViewItem}}}"
+                                                MouseLeftButtonDown="Item_LeftMouseDown"
+                                                ToolTipService.IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=Tag.IsHost}"
+                                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                                >
+                                        <Image Height="16" Source="{Binding Path=Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type myClasses:ImagedConnectionTreeViewItem}}}" Stretch="Fill" Width="16" />
+                                        <Image Height="16" Width="3" /> <!-- Spacer between Image and Text to enable Contextmenu even in the space-->
+                                        <TextBlock Text="{Binding}" />
+                                        <StackPanel.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel Orientation="Vertical" MinHeight="0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="Host:" />
+                                                        <Label Content="{Binding Path=PlacementTarget.Tag.Host, RelativeSource={RelativeSource AncestorType=ToolTip}}"/>
+                                                    </StackPanel>
+                                                    <Label Content="{Binding Path=PlacementTarget.Tag.Description, RelativeSource={RelativeSource AncestorType=ToolTip}}" Margin="0,-10,0,0"/>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </StackPanel.ToolTip>
+                                        <StackPanel.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Command="my:ImagedConnectionTreeView.Connect" Header="Connect" 
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsNoFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                            IsEnabled="{Binding Path=PlacementTarget.Tag.IsNoFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/play16.png" 
+                                                                IsEnabled="{Binding Path=PlacementTarget.Tag.IsNoFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Command="my:ImagedConnectionTreeView.AddFolder" Header="Add Folder" 
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                            IsEnabled="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/folderadd16.png" 
+                                                                IsEnabled="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Command="my:ImagedConnectionTreeView.AddSetting" Header="Add Connection"
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                            IsEnabled="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/screenadd16.png"
+                                                                IsEnabled="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Command="my:ImagedConnectionTreeView.DeleteEntry" Header="Delete">                                                
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/redcross16.png" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="Edit" Command="my:ImagedConnectionTreeView.EditSetting"
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsNoFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                            IsEnabled="{Binding Path=PlacementTarget.Tag.IsNoFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/screenedit16.png" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="Set as defaultfolder" Command="my:ImagedConnectionTreeView.SetDefaultFolder"
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                            IsEnabled="{Binding Path=PlacementTarget.Tag.IsFolder, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/screenedit16.png" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="Set as default protocol" Command="my:ImagedConnectionTreeView.SetDefaultProtocol"
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsProtocol, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                          IsEnabled="{Binding Path=PlacementTarget.Tag.IsProtocol, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/screenedit16.png" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="Sort Up (Ctrl +)" Command="my:ImagedConnectionTreeView.SortUp"
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsSortable, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                          IsEnabled="{Binding Path=PlacementTarget.Tag.IsSortable, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/screenedit16.png" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="Sort Down (Ctrl -)" Command="my:ImagedConnectionTreeView.SortDown"
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsSortable, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                          IsEnabled="{Binding Path=PlacementTarget.Tag.IsSortable, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/screenedit16.png" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="Add to QuickConnect" Command="my:ImagedConnectionTreeView.QuickConnectAdd"
+                                                          Visibility="{Binding Path=PlacementTarget.Tag.IsProtocol, RelativeSource={RelativeSource AncestorType=ContextMenu}, Converter={StaticResource BoolVisibilityConverter}}"
+                                                          IsEnabled="{Binding Path=PlacementTarget.Tag.IsProtocol, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                    <MenuItem.Icon>
+                                                        <Image Source="/beRemote.GUI.Controls;component/Images/greenplus16.png" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </StackPanel.ContextMenu>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TreeView.Resources>
+                <TreeView.Style>
+                    <Style TargetType="{x:Type my:ImagedConnectionTreeViewControl}">
+                        <EventSetter Event="TreeViewItem.DragOver" Handler="treeView_DragOver"/>
+                        <EventSetter Event="TreeViewItem.Drop" Handler="treeView_Drop"/>
+                        <EventSetter Event="TreeViewItem.MouseMove" Handler="treeView_MouseMove"/>
+                    </Style>
+                </TreeView.Style>            
+            </my:ImagedConnectionTreeViewControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

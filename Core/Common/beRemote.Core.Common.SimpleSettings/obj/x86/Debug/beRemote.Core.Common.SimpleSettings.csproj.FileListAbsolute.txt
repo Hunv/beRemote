@@ -1,0 +1,5 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.SimpleSettings.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.SimpleSettings.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.SimpleSettings\obj\x86\Debug\beRemote.Core.Common.SimpleSettings.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.SimpleSettings\obj\x86\Debug\beRemote.Core.Common.SimpleSettings.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.SimpleSettings\obj\x86\Debug\beRemote.Core.Common.SimpleSettings.csprojResolveAssemblyReference.cache

@@ -1,0 +1,5 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.MEF.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.MEF.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\MEF\beRemote.MEF\obj\x86\Debug\beRemote.MEF.csprojResolveAssemblyReference.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\MEF\beRemote.MEF\obj\x86\Debug\beRemote.MEF.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\MEF\beRemote.MEF\obj\x86\Debug\beRemote.MEF.pdb

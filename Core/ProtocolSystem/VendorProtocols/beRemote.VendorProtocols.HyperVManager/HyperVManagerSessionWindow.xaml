@@ -1,0 +1,227 @@
+﻿<classes:TabBase x:Class="beRemote.VendorProtocols.HyperVManager.HyperVManagerSessionWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:beRemote.VendorProtocols.HyperVManager"
+             xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600"
+             Name="hvcontrol"
+             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+             Unloaded="hvcontrol_Unloaded"
+             >
+    <classes:TabBase.Resources>        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:VisibilityToBoolConverter x:Key="VisibilityToBoolConv"/>
+            <local:EnabledStateToIconConverter x:Key="StateToIconConv"/>
+        </ResourceDictionary>        
+    </classes:TabBase.Resources>
+    
+    <Grid>                
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        
+        <!-- Row 0 (Toolbar) -->
+        <ToolBar>
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="Connect to virtual machine"/>
+                </Button.ToolTip>
+                <Image Source="GUI\connect.png" />
+            </Button>
+            <Separator />
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="Configure the virtual machine"/>
+                </Button.ToolTip>
+                <Image Source="GUI\settings.png" />
+            </Button>
+            <Separator />
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="Start the virtual machine"/>
+                </Button.ToolTip>
+                <Image Source="GUI\turnon.png" />
+            </Button>
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="Turn off the virtual machine imediatly"/>
+                </Button.ToolTip>
+                <Image Source="GUI\turnoff.png" />
+            </Button>
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="Shut down the virtual machine (installed integration services required)"/>
+                </Button.ToolTip>
+                <Image Source="GUI\shutdown.png" />
+            </Button>
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="Hibernate the virtual machine"/>
+                </Button.ToolTip>
+                <Image Source="GUI\save.png" />
+            </Button>
+            <Separator />
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="Pause the virtual machine"/>
+                </Button.ToolTip>
+                <Image Source="GUI\pause.png" />
+            </Button>
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="restart the virtual machine (like power off/on-circle)"/>
+                </Button.ToolTip>
+                <Image Source="GUI\reset.png" />
+            </Button>
+            <Separator />
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="create a snapshot"/>
+                </Button.ToolTip>
+                <Image Source="GUI\snapshots.png" />
+            </Button>
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="revert to a saved state"/>
+                </Button.ToolTip>
+                <Image Source="GUI\revert.png" />
+            </Button>
+            <Separator />
+            <Button>
+                <Button.ToolTip>
+                    <Label Content="rename the virtual machine"/>
+                </Button.ToolTip>
+                <Image Source="GUI\rename.png" />
+            </Button>
+        </ToolBar>
+
+        <!-- Row 1 (Serverlist) http://stackoverflow.com/questions/21505449/binding-datacontext-in-resources-->
+        <DataGrid Grid.Row="1"                   
+                  ItemsSource="{Binding MachineList, UpdateSourceTrigger=PropertyChanged}" 
+                  IsSynchronizedWithCurrentItem="True" 
+                  AutoGeneratingColumn="dgMachineList_AutoGeneratingColumn" 
+                  CanUserResizeRows="True" 
+                  CanUserAddRows="False" 
+                  AlternatingRowBackground="LightCyan" 
+                  AlternationCount="2" 
+                  IsReadOnly="True" 
+                  VerticalContentAlignment="Center" 
+                  SelectionMode="Single" 
+                  HorizontalGridLinesBrush="LightGray"
+                  VerticalGridLinesBrush="LightGray"
+                  x:Name="dgMachineListRef"
+                  >
+            <DataGrid.Resources>
+                <local:BindingProxy x:Key="proxy" Data="{Binding}"/>
+                <ContextMenu x:Key="DataGridColumnHeaderContextMenu">
+                    <MenuItem Header="{StaticResource MenHeadGeneral}">
+                        <CheckBox Tag="Machinename" Content="{StaticResource MenMachinename}" IsChecked="{Binding Path=Data.ColumnsVisibility[Machinename], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="GUID" Content="{StaticResource MenGUID}" IsChecked="{Binding Path=Data.ColumnsVisibility[GUID], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="Notes" Content="{StaticResource MenNotes}" IsChecked="{Binding Path=Data.ColumnsVisibility[Notes], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="Description" Content="{StaticResource MenDescription}" IsChecked="{Binding Path=Data.ColumnsVisibility[Description], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="Generation" Content="{StaticResource MenGeneration}" IsChecked="{Binding Path=Data.ColumnsVisibility[Generation], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadPath}">
+                        <CheckBox Tag="PathForCheckpointFiles" Content="{StaticResource MenPathForCheckpointFiles}" IsChecked="{Binding Path=Data.ColumnsVisibility[PathForCheckpointFiles], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="PathForSmartPaging" Content="{StaticResource MenPathForSmartPaging}" IsChecked="{Binding Path=Data.ColumnsVisibility[PathForSmartPaging], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>                        
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadStatechangeAction}">
+                        <CheckBox Tag="StartupAction" Content="{StaticResource MenStartupAction}" IsChecked="{Binding Path=Data.ColumnsVisibility[StartupAction], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="StartupDelay" Content="{StaticResource MenStartupDelay}" IsChecked="{Binding Path=Data.ColumnsVisibility[StartupDelay], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="StopAction" Content="{StaticResource MenStopAction}" IsChecked="{Binding Path=Data.ColumnsVisibility[StopAction], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="RecoverAction" Content="{StaticResource MenRecoverAction}" IsChecked="{Binding Path=Data.ColumnsVisibility[RecoverAction], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadStatus}">
+                        <CheckBox Tag="EnabledState" Content="{StaticResource MenEnabledState}" IsChecked="{Binding Path=Data.ColumnsVisibility[EnabledState], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="HealthState" Content="{StaticResource MenHealthState}" IsChecked="{Binding Path=Data.ColumnsVisibility[HealthState], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="Status" Content="{StaticResource MenStatus}" IsChecked="{Binding Path=Data.ColumnsVisibility[Status], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="StatusDescriptions" Content="{StaticResource MenStatusDescriptions}" IsChecked="{Binding Path=Data.ColumnsVisibility[StatusDescriptions], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="OperationalStatus" Content="{StaticResource MenOperationalStatus}" IsChecked="{Binding Path=Data.ColumnsVisibility[OperationalStatus], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="OnTimeInMilliseconds" Content="{StaticResource MenOnTimeInMilliseconds}" IsChecked="{Binding Path=Data.ColumnsVisibility[OnTimeInMilliseconds], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="OnTimeInDays" Content="{StaticResource MenOnTimeInDays}" IsChecked="{Binding Path=Data.ColumnsVisibility[OnTimeInDays], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadReplication}">
+                        <CheckBox Tag="ReplicationHealth" Content="{StaticResource MenReplicationHealth}" IsChecked="{Binding Path=Data.ColumnsVisibility[ReplicationHealth], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="ReplicationMode" Content="{StaticResource MenReplicationMode}" IsChecked="{Binding Path=Data.ColumnsVisibility[ReplicationMode], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="ReplicationState" Content="{StaticResource MenReplicationState}" IsChecked="{Binding Path=Data.ColumnsVisibility[ReplicationState], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="FailOverReplicationType" Content="{StaticResource MenFailOverReplicationType}" IsChecked="{Binding Path=Data.ColumnsVisibility[FailOverReplicationType], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="LastReplicationType" Content="{StaticResource MenLastReplicationType}" IsChecked="{Binding Path=Data.ColumnsVisibility[LastReplicationType], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="LastApplicationConsistentReplicationTime" Content="{StaticResource MenLastApplicationConsistentReplicationTime}" IsChecked="{Binding Path=Data.ColumnsVisibility[LastApplicationConsistentReplicationTime], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="LastReplicationTime" Content="{StaticResource MenLastReplicationTime}" IsChecked="{Binding Path=Data.ColumnsVisibility[LastReplicationTime], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>                        
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadTimestamps}">
+                        <CheckBox Tag="TimeOfLastConfigurationChange" Content="{StaticResource MenTimeOfLastConfigurationChange}" IsChecked="{Binding Path=Data.ColumnsVisibility[TimeOfLastConfigurationChange], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="TimeOfLastStateChange" Content="{StaticResource MenTimeOfLastStateChange}" IsChecked="{Binding Path=Data.ColumnsVisibility[TimeOfLastStateChange], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox Tag="InstallDate" Content="{StaticResource MenInstallDate}" IsChecked="{Binding Path=Data.ColumnsVisibility[InstallDate], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadMemory}">
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadProcessor}">
+                        <CheckBox Tag="NumberOfNUMANodes" Content="{StaticResource MenNumberOfNUMANodes}" IsChecked="{Binding Path=Data.ColumnsVisibility[NumberOfNUMANodes], Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadIntegration}">
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadNetwork}">
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadIDEController}">
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadSCSIController}">
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadStorageDevice}">
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadSerialController}">
+                    </MenuItem>
+                    <MenuItem Header="{StaticResource MenHeadBIOS}">
+                    </MenuItem>
+                </ContextMenu>
+
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="ContextMenu" Value="{StaticResource DataGridColumnHeaderContextMenu}" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding EnabledState, Converter={StaticResource StateToIconConv}}" Stretch="None" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>                    
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>            
+        </DataGrid>
+
+        <!-- This is the Column-Selection "Context-Menu" of the DataGrid -->
+        <!--<Border Grid.Row="1"
+                BorderBrush="Black" 
+                BorderThickness="1" 
+                Margin="{Binding ContextMargin}" 
+                HorizontalAlignment="Left" 
+                Visibility="{Binding ContextVisible}" 
+                VerticalAlignment="Top">
+            <ItemsControl ItemsSource="{Binding Columns, ElementName=dgMachineList}" Background="WhiteSmoke" HorizontalAlignment="Left">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding Visibility, Converter={StaticResource VisibilityToBoolConv}}" 
+                                  Margin="5,3,5,3" 
+                                  Content="{Binding Header}" 
+                                  Checked="CheckBox_Checked" 
+                                  Unchecked="CheckBox_Checked"                                  
+                                  />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>-->
+        <!-- Row 2 (Thumbnail + Current statistics) -->
+            
+    </Grid>
+</classes:TabBase>

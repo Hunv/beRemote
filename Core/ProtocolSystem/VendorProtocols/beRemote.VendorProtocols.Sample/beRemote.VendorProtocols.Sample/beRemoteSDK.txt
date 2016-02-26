@@ -1,0 +1,76 @@
+1. 	Create a new WPF UserControl Library project (e.g. beRemote.VendorProtocols.Sample
+2.	Add basic project structure:
+	- Folders:
+		* <Projectname> - e.g. beRemote.VendorProtocols.Sample
+			* libs - Paste your reference dlls here (NOTE: add all your dlls to the project and mark them as "Build Action = Content" and "Copy to[...] = Copy [...]")		
+3.	In this step you'll have to add the beRemote libs and your own libs.
+	It's importent that you set the flag "Copy local" to "False" on ALL references. This is necessary to keep the plugins/protocols directory clean.
+	The beRemote libs will be available through the pluginloader / AppDomain. To provide your own references copy them into the previously created "<Projectname>\libs" folder. Our pluginsystem will add all libs inside this folder to your plugins AppDomain.
+		- LogSystem
+		- ProtocolSystem
+		- System.ComponentModel.Composition
+		- < Your own references >
+4.	Add default classes/files to your project
+		- Protocol class - e.g. SampleProtocol.cs
+			* add usings:
+				- beRemote.Core.ProtocolSystem.ProtocolBase.Types;
+				- beRemote.Core.ProtocolSystem.ProtocolBase.Interfaces;
+				- beRemote.Core.ProtocolSystem.ProtocolBase;
+				- System.ComponentModel.Composition;
+			* add base class
+				- Protocol
+				- Implement abstract class 'Protocol' (Simply by HotKey SHIFT+ALT+F10 - ENTER) 
+				  For now leave alle override methos as they are (NotImplementedException). We will fix this later in this tutorial
+			* add necessary metadata information
+				- Attribute: ProtocolMetaData
+					* ProtocolName - type: String; content: Name of this protocol. e.g. Sample Protocol
+					* ProtocolDescription - type: String; content: description
+					* ProtocolFullQualifiedName - type: String; content: Full qualified assembly name. e.g. beRemote.VendorProtocol.Sample.SampleProtocol
+					* ProtocolConfigFolder - type: String; content: The folder where the config files are located. e.g. beRemote.VendorProtocols.Sample
+					* ProtocolIniFile - type: String; content: the name of the default protocol config. e.g. plugin.ini
+					* ProtocolVersionCode - type: int; content: The version for this plugin (needed for later update impl)
+		- Session class - e.g. SampleSession.cs
+			* add usings:
+				- beRemote.Core.ProtocolSystem.ProtocolBase;
+				- beRemote.Core.ProtocolSystem.ProtocolBase.Interfaces;				
+			* add base class
+				- Session
+				- Implement abstract class 'Session' (Simply by HotKey SHIFT+ALT+F10 - Enter)
+				  For now leave alle override methos as they are (NotImplementedException). We will fix this later in this tutorial
+  		* The base class 'session' has a default constructor. This constructor have to be called by your session implementation. To do this you have to create a new constructor. The simpliest way to implement this is add the following line to the top of your Session.cs (Assuming that your class's name is 'SampleSession':
+  		  - public SampleSession(IServer server, Protocol protocol, long dbConfigId) : base(server, protocol, dbConfigId) { }
+  			  of course you can add your own logic to the constructor, but for our example we do not need to call any other implementations
+		- Plugin/Protocol configuration
+		  Add a file named the value you have chosen in 4.-metadata-ProtocolIniFile attribute (e.g. plugin.ini) Add the necessary default values defined in beRemoteSDK-pluginini-def.txt
+      Add a file named 'mapping.ini'. Add the necessary default values defined in beRmeoteSDK-mappingini.txt      
+5.  If not yet done copy/paste your own references inside the folder <protocolname>\libs. It is highly important that you mark all files inside this as "Content" and "Copy if newer". Otherweise beRemote will ignore this protocols.
+    Additional this behaviour beRemote will ignore protocols that copy their references to the local output. This is to keep the plugins \protocols directory clean.
+6.  beRemote needs icons to display your protocols. To implement this you only have to add your icons to the project. Simply copy them to <protocolname>\res (e.g. beRemote.VendorProtocols.Sample\res)
+    By default beRemote will load icon images in format "PNG" with the prefix "icon_". Due to this behaviour the files inside the res folder have to be like this:
+      * icon_128.png
+      * icon_64.png
+      * icon_32.png
+      * icon_16.png      
+    If needed you can change the extensions and prefix simply by changing the keys in your plugin ini (protocol.icon.prefix and protocol.icon.ext). 
+    Please note that it is not possible to use all file formats, since under Windows XP some bitmaps are not useable by WPF. We HIGHLY recommend not to change this settings.
+    Ass always set the icons files to "content" and "copy"!
+
+7.  Now we have a fully configured Protocol plugin. But if you build your protocol and if you would try to execute it in beRemote the Application would show some NotImplemented-exceptions.
+    You may remember that we diddn't changed the methods at the beginning. To fix this issues open your project and open your Protocol.cs-source file (e.g. SampleProtocol.cs).
+      * Now we will edit the methods inside it. Change them like this:
+        - GetProtocolCompatibleServers() - /// Returns all compatible ServerTypes defined in Common.Types.ServerType
+          * return new ServerType[] { ServerType.LINUX, ServerType.MACOS, ServerType.WINDOWS };
+        - NewSession(IServer server, long dbConfigId)  
+          * return new SampleSession(server, this, dbConfigId);
+      * Fixes for Session.cs (e.g. SampleSession.cs) (following list is sorted by call order of beRemote)             
+        - OpenConnection(String username, String password) - /// Do whatever is needed for opening the connection (note that directly after this call beRemote will automatically call GetSessionWindow, so prepare the session window!)
+        - GetSessionWindow() - /// return the session window for interacting with the remote side
+        - CloseConnection() - /// Close the connection, dispose all objects
+          * Call this as last call in CloseConnection():
+            this.TriggerCloseConnectionEvent();          
+      * You can see more about the GetSessionWindow() method in the provided SamplePlugin. This topic is mostly self explained by viewing the source.                 
+
+                      
+			
+				
+		

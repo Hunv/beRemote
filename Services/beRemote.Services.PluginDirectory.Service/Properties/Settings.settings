@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="beRemote.Services.PluginDirectory.Service.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SQLServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SHACKNET-WS\BEREMOTE</Value>
+    </Setting>
+    <Setting Name="SQLDatabase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">beRemote</Value>
+    </Setting>
+    <Setting Name="SQLUser" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">beremote.plg.svc.reader</Value>
+    </Setting>
+    <Setting Name="SQLPasswordObfuscated" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">b3R3m073.plg.svc.p4dd20rd</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

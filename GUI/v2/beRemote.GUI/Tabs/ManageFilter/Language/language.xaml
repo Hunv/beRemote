@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleManageFilter">Manage Filter</system:String>
+
+    <system:String x:Key="RibTabHeadFilter">Filter</system:String>
+    <system:String x:Key="RibFilterGrpAddCondition">Add Condition</system:String>
+    <system:String x:Key="RibFilterGrpAdvanced">Advanced</system:String>
+    <system:String x:Key="RibFilterBtnName">Name</system:String>
+    <system:String x:Key="RibFilterBtnHost">Hostname/IP</system:String>
+    <system:String x:Key="RibFilterBtnDescription">Description</system:String>
+    <system:String x:Key="RibFilterBtnOperationSystem">Operating System</system:String>
+    <system:String x:Key="RibFilterBtnFolder">Folder</system:String>
+    <system:String x:Key="RibFilterBtnProtocol">Protocol</system:String>
+    <system:String x:Key="RibFilterBtnProtocolsetting">Protocolsetting</system:String>
+    <system:String x:Key="RibFilterBtnCredentials">Credentials</system:String>
+    <system:String x:Key="RibFilterBtnPort">Port</system:String>
+    <system:String x:Key="RibFilterBtnConnection">Connection</system:String>
+    <system:String x:Key="RibFilterBtnPublic">Public</system:String>
+    <system:String x:Key="RibFilterBtnAddCollection">Add Collection</system:String>
+</ResourceDictionary>

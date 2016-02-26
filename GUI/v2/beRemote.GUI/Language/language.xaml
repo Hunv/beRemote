@@ -1,0 +1,157 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- Ribbon Descriptions -->
+    <system:String x:Key="RibTabHeadServer">Server</system:String>
+    <system:String x:Key="RibTabHeadSettings">Settings</system:String>
+    <system:String x:Key="RibTabHeadToolsAndFeatures">Tools and Features</system:String>
+    <system:String x:Key="RibTabHeadHelp">Help</system:String>
+
+    <system:String x:Key="RibServerGrpConnections">Connections</system:String>
+    <system:String x:Key="RibServerGrpManage">Manage</system:String>
+    <system:String x:Key="RibServerGrpMore">More</system:String>
+    <system:String x:Key="RibServerGrpFavorites">Favorites</system:String>
+    
+    <system:String x:Key="RibServerBtnAdd">Add</system:String>
+    <system:String x:Key="RibServerBtnRemove">Remove</system:String>
+    <system:String x:Key="RibServerBtnAddFolder">Add Folder</system:String>
+    <system:String x:Key="RibServerBtnCredentials">Credentials</system:String>
+    <system:String x:Key="RibServerBtnVpn">VPN</system:String>
+    <system:String x:Key="RibServerBtnHistory">History</system:String>
+    <system:String x:Key="RibServerBtnWhoIsOnline">Who is online</system:String>
+
+    <system:String x:Key="RibSettingsGrpProfile">Profile</system:String>
+    <system:String x:Key="RibSettingsGrpImport">Import</system:String>
+    <system:String x:Key="RibSettingsGrpSuperadmin">Superadmin</system:String>
+
+    <system:String x:Key="RibHelpGrpHelp">Help</system:String>
+    
+    <system:String x:Key="RibHelpBtnHelp">Help</system:String>
+    <system:String x:Key="RibHelpBtnCommunity">Community</system:String>
+    <system:String x:Key="RibHelpBtnAbout">About</system:String>
+    
+    <!-- Contextribbon Filter-->
+    <system:String x:Key="RibTabHeadFilter">Filter</system:String>    
+    <system:String x:Key="RibFilterGrpAddCondition">Add Condition</system:String>
+    <system:String x:Key="RibFilterGrpAdvanced">Advanced</system:String>
+    <system:String x:Key="RibFilterBtnName">Name</system:String>
+    <system:String x:Key="RibFilterBtnHost">Hostname/IP</system:String>
+    <system:String x:Key="RibFilterBtnDescription">Description</system:String>
+    <system:String x:Key="RibFilterBtnOperationSystem">Operating System</system:String>
+    <system:String x:Key="RibFilterBtnFolder">Folder</system:String>
+    <system:String x:Key="RibFilterBtnProtocol">Protocol</system:String>
+    <system:String x:Key="RibFilterBtnProtocolsetting">Protocolsetting</system:String>
+    <system:String x:Key="RibFilterBtnCredentials">Credentials</system:String>
+    <system:String x:Key="RibFilterBtnPort">Port</system:String>
+    <system:String x:Key="RibFilterBtnConnection">Connection</system:String>
+    <system:String x:Key="RibFilterBtnPublic">Public</system:String>
+    <system:String x:Key="RibFilterBtnAddCollection">Add Collection</system:String>
+
+    <!-- Contextribbon VPN -->
+    <system:String x:Key="RibTabHeadVpn">VPN</system:String>
+    <system:String x:Key="RibGrpVpnManage">Manage</system:String>
+    <system:String x:Key="RibVpnAdd">Add VPN</system:String>
+    <system:String x:Key="RibVpnRemove">Delete VPN</system:String>
+    <system:String x:Key="RibVpnTest">Test VPN</system:String>
+    <system:String x:Key="RibGrpVpnSave">Save</system:String>
+    <system:String x:Key="RibVpnSaveChanges">Save Changes</system:String>
+    
+    <!-- Application Menu -->
+    <system:String x:Key="RibMenuClose">Close</system:String>
+    <system:String x:Key="RibMenuBtnEdit">Edit Profile</system:String>
+    <system:String x:Key="RibMenuBtnFavorites">Manage Favorites</system:String>
+    <system:String x:Key="RibMenuBtnFiltersets">Manage Filtersets</system:String>
+    <system:String x:Key="RibMenuBtnConnections">Import Connections</system:String>
+    <system:String x:Key="RibMenuBtnManageUser">Manage User</system:String>
+    <system:String x:Key="RibMenuBtnSuperadminTools">Superadmin Tools</system:String>
+    <system:String x:Key="RibMenuBtnDatabaseManager">Database Manager</system:String>
+    <system:String x:Key="RibMenuBtnTestTab">Test Tab</system:String>
+
+    <!-- Ribbon Default Tools+Features-Group -->
+    <system:String x:Key="RibTafGrpTools">Tools</system:String>
+    
+    <!-- Docking Grid -->
+    <system:String x:Key="TabTitleConnections">Connections</system:String>
+    <system:String x:Key="TabTitleHistory">History</system:String>
+    
+    <!-- ContextMenu ConnectionTree -->
+    <system:String x:Key="TvMenConnectWithoutCredentials">Connect without credentials</system:String>   
+    
+    <!-- Quick-Connect Textbox -->
+    <system:String x:Key="TxtQuickConnect">Quick Connect</system:String>
+    
+    <!-- Login Dialog -->
+    <system:String x:Key="LoginLblUsername">Username</system:String>
+    <system:String x:Key="LoginLblPassword">Password</system:String>
+    <system:String x:Key="LoginBtnLogin">Login</system:String>
+    <system:String x:Key="LoginBtnCancel">Cancel</system:String>
+    <system:String x:Key="LoginBtnCreateAccount">Create Account</system:String>
+    <system:String x:Key="LoginLblPleaseLogin">Please login</system:String>
+
+
+    <!-- Change Password Dialog -->
+    <system:String x:Key="ChPwLblText">To change your password enter your old password and the new password twice.</system:String>
+    <system:String x:Key="ChPwLblOldPassword">Old Password</system:String>
+    <system:String x:Key="ChPwLblNewPassword">New Password</system:String>
+    <system:String x:Key="ChPwLblNewPasswordRepeat">Repeat New Password</system:String>
+    <system:String x:Key="ChPwBtnSave">Save</system:String>
+    <system:String x:Key="ChPwBtnCancel">Cancel</system:String>
+
+    <!-- Create Account Dialog -->
+    <system:String x:Key="CreateAccountLblText">Select your username and set your initial password</system:String>
+    <system:String x:Key="CreateAccountLblUsername">Username</system:String>
+    <system:String x:Key="CreateAccountLblDisplayname">Displayname</system:String>
+    <system:String x:Key="CreateAccountLblPassword">Password</system:String>
+    <system:String x:Key="CreateAccountLblPassword2">Password Repeat</system:String>
+    <system:String x:Key="CreateAccountBtnSave">Save</system:String>
+    <system:String x:Key="CreateAccountBtnCancel">Cancel</system:String>
+    
+    <!-- Force Password Change Dialog-->
+    <system:String x:Key="ChPwForceLblText">You have to change your password. Either your administrator set this requirement or an update of beRemote triggered this change.</system:String>
+    <system:String x:Key="ChPwForceLblOldPassword">Old Password</system:String>
+    <system:String x:Key="ChPwForceLblNewPassword">New Password</system:String>
+    <system:String x:Key="ChPwForceLblNewPasswordRepeat">Repeat New Password</system:String>
+    <system:String x:Key="ChPwForceBtnSave">Save</system:String>
+    <system:String x:Key="ChPwForceBtnCancel">Cancel</system:String>
+    
+    <!-- Messages -->
+    <system:String x:Key="MsgUserNotExistsTitle">User not exists</system:String>
+    <system:String x:Key="MsgUserNotExistsText">This user doesn't exists.</system:String>
+    <system:String x:Key="MsgAccessDeniedTitle">Access denied</system:String>
+    <system:String x:Key="MsgAccessDeniedText">You entered invalice credentials. Please try again.</system:String>
+
+
+    <!-- Cisco VPN Messages -->
+    <system:String x:Key="VpnCiscoEnterConfigname">Please enter a Configname for your Cisco-VPN-Connection first!</system:String>
+    <system:String x:Key="VpnCiscoEnterConfignameTitle">Validation failed</system:String>
+    <system:String x:Key="VpnCiscoClientMissing">The Cisco-Client cannot be found at the configured path</system:String>
+    <system:String x:Key="VpnCiscoClientMissingTitle">Validation failed</system:String>
+    <system:String x:Key="VpnCiscoSelectCredential">Select a credentialset or activate the ""Show Dialog""-Option for your Cisco-VPN-Connection</system:String>
+    <system:String x:Key="VpnCiscoSelectCredentialTitle">Validation failed</system:String>
+    <system:String x:Key="VpnCiscoAlreadyOpen">There is already an active CiscoVPN-Connection.</system:String>
+    <system:String x:Key="VpnCiscoAlreadyOpenTitle">Validation failed</system:String>
+
+    <!-- OpenVPN Messages -->
+    <system:String x:Key="VpnOpenSetPath">Set the path to OpenVPN first</system:String>
+    <system:String x:Key="VpnOpenSetPathTitle">Validation failed</system:String>
+    <system:String x:Key="VpnOpenSetName">Set the name of the OpenVPN connection first</system:String>
+    <system:String x:Key="VpnOpenSetNameTitle">Validation failed</system:String>
+    <system:String x:Key="VpnOpenAlreadyOpen">There is already an active OpenVPN-Connection.</system:String>
+    <system:String x:Key="VpnOpenAlreadyOpenTitle">Validation failed</system:String>
+
+    <!-- Shrewsoft VPN Messages -->
+    <system:String x:Key="VpnShrewSetPath">Set the path to ShrewSoft VPN first</system:String>
+    <system:String x:Key="VpnShrewSetPathTitle">Validation failed</system:String>
+    <system:String x:Key="VpnShrewSetName">Set the name of the ShrewSoft VPN connection first</system:String>
+    <system:String x:Key="VpnShrewSetNameTitle">Validation failed</system:String>
+    <system:String x:Key="VpnShrewSelectCredential">Select a credentialset or activate the ""Show Dialog""-Option for your ShrewSoft-VPN-Connection</system:String>
+    <system:String x:Key="VpnShrewSelectCredentialTitle">Validation failed</system:String>
+
+    <!-- Windows VPN Messages -->
+    <system:String x:Key="VpnWinSetName">Set the name of the Windows VPN connection first</system:String>
+    <system:String x:Key="VpnWinSetNameTitle">Validation failed</system:String>
+    <system:String x:Key="VpnWinSelectCredential">Select a credentialset or activate the ""Show Dialog""-Option for your Windows-VPN-Connection</system:String>
+    <system:String x:Key="VpnWinSelectCredentialTitle">Validation failed</system:String>
+
+</ResourceDictionary>

@@ -1,0 +1,12 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\beRemote.Core.Kernel\obj\x64\Debug\beRemote.Core.Kernel.csprojResolveAssemblyReference.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\config.ini
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Kernel.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Kernel.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\beRemote.Core.Kernel\obj\x64\Debug\beRemote.Core.Kernel.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\beRemote.Core.Kernel\obj\x64\Debug\beRemote.Core.Kernel.pdb
+D:\Productions\#programming\beRemote GIT\Core\beRemote.Core.Kernel\obj\x64\Debug\beRemote.Core.Kernel.dll
+D:\Productions\#programming\beRemote GIT\Core\beRemote.Core.Kernel\obj\x64\Debug\beRemote.Core.Kernel.pdb
+D:\Productions\#programming\beRemote GIT\compiled\config.ini
+D:\Productions\#programming\beRemote GIT\compiled\beRemote.Core.Kernel.dll
+D:\Productions\#programming\beRemote GIT\compiled\beRemote.Core.Kernel.pdb
+D:\Productions\#programming\beRemote GIT\Core\beRemote.Core.Kernel\obj\x64\Debug\beRemote.Core.Kernel.csprojResolveAssemblyReference.cache

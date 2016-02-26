@@ -1,0 +1,227 @@
+﻿<classes:TabBase x:Class="beRemote.GUI.Tabs.ManageFilter.TabManageFilter"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:tabManageFilter="clr-namespace:beRemote.GUI.Tabs.ManageFilter"
+                 xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+                 mc:Ignorable="d" 
+                 d:DesignHeight="500" d:DesignWidth="1024"
+                 DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                 Loaded="ContentTab_Loaded"
+                 Unloaded="TabBase_Close"
+                 IconSource="Images/filter_16.png"
+                 IsMultiTab="False"
+               >
+    <classes:TabBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <tabManageFilter:FilterTypeToVisibilityConverter x:Key="FilterTypeToVisibilityConv"/>
+            <tabManageFilter:FilterTypeToBoolConverter x:Key="FilterTypeToBoolConv"/>
+            <tabManageFilter:FilterSetIdValidatorConverter x:Key="FilterSetIdValidator"/>
+            <tabManageFilter:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+        </ResourceDictionary>
+    </classes:TabBase.Resources>
+    <classes:TabBase.Header>
+        <StaticResource ResourceKey="TabTitleManageFilter"/>
+    </classes:TabBase.Header>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*" MinWidth="300"/>
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" Name="lstFilterOverview" ItemsSource="{Binding FilterSetList, UpdateSourceTrigger=PropertyChanged}"
+                 SelectionChanged="lstFilterOverview_SelectionChanged" Margin="0,0,0,80">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Foreground="{Binding DisplayColor}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" {0} ({1})">
+                                <Binding Path="Title"/>
+                                <Binding Path="Id"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Column="0" Content="Add New" HorizontalAlignment="Left" Margin="0,0,0,30" VerticalAlignment="Bottom" Width="200" Click="btnSetAddNew_Click"/>
+        <Button Grid.Column="0" Content="Delete" HorizontalAlignment="Left" Margin="0,0,0,5" VerticalAlignment="Bottom" Width="98" Click="btnSetDelete_Click"/>
+        <Button Grid.Column="0" Content="Copy" Margin="0,0,0,5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="98" Click="btnSetCopy_Click"/>
+        <Button Grid.Column="0" Content="Save Changes" Margin="0,0,0,55" Name="btnSetSave" HorizontalAlignment="Left" Width="200" Click="btnSetSave_Click" VerticalAlignment="Bottom"/>
+
+        <GroupBox Grid.Column="1" Header="Details">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <!-- Define Filters -->
+                    <RowDefinition Height="120"/>
+                    <!-- Filtersettings -->
+                    <RowDefinition Height="30"/>
+                    <!-- Save Filterset -->
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Row 0-->
+                <TextBox Grid.Row="0" Grid.ColumnSpan="2" Text="Connections I have access to" Height="23" VerticalAlignment="Top" IsReadOnly="True" VerticalContentAlignment="Center" />
+                <!-- <ListBox Name="lstFilter" ItemsSource="{Binding FilterList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="DisplayText" SelectedValuePath="Filter" Grid.Row="0" Margin="0,23,0,30">-->
+                <ListBox Name="lstFilter" Grid.ColumnSpan="2" ItemsSource="{Binding FilterList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Filter" Grid.Row="0" Margin="0,23,0,0" SelectionChanged="lstFilter_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayText}" Foreground="{Binding DisplayColor}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Grid.Row="1" Grid.ColumnSpan="2"  Content="Delete" Margin="0,10,10,0" Name="btnFilterDelete" Click="btnFilterDelete_Click" HorizontalAlignment="Right" Width="104" Height="22" VerticalAlignment="Top"/>
+
+                <!-- Row 1-->
+                <!-- Stackpanel for fitting Controls after label next to label (required for Multi-Language)-->
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Top" Margin="0,0,119,0" MinWidth="600">
+                    <Label Content="compare with" Grid.Row="1" Grid.ColumnSpan="2" Height="24" />
+                    <!-- For Text-Properties-->
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
+                             Height="24" 
+                             Text="{Binding SelectedValue.Value, ElementName=lstFilter}" 
+                             Visibility="{Binding SelectedFilterIsString, Converter={StaticResource BoolToVisibilityConv}}" 
+                             VerticalContentAlignment="Center" 
+                             MinWidth="200"/>
+                    <!-- For Collections-Properties-->
+                    <ComboBox Grid.Row="1" Grid.ColumnSpan="2" 
+                              Height="24"
+                              ItemsSource="{Binding FilterSetList, UpdateSourceTrigger=PropertyChanged}"
+                              Visibility="{Binding SelectedFilterIsFilterSet, Converter={StaticResource BoolToVisibilityConv}}" 
+                              VerticalContentAlignment="Center"
+                              MinWidth="200"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding SelectedValue.Value, ElementName=lstFilter, Converter={StaticResource FilterSetIdValidator}}"
+                              Name="cmbValue" 
+                              IsVisibleChanged="cmbValue_IsVisibleChanged"
+                              >                        
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}" Foreground="{Binding DisplayColor}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
+                    <!-- For Protocol-Properties -->
+                    <ComboBox Grid.Row="1" Grid.ColumnSpan="2" 
+                              Height="24"
+                              ItemsSource="{Binding ProtocolList, UpdateSourceTrigger=PropertyChanged}"
+                              Visibility="{Binding SelectedFilterIsProtocol, Converter={StaticResource BoolToVisibilityConv}}" 
+                              VerticalContentAlignment="Center"
+                              MinWidth="200"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding SelectedValue.Value, ElementName=lstFilter, Converter={StaticResource FilterSetIdValidator}}"
+                              Name="cmbValueProtocol" 
+                              IsVisibleChanged="cmbValue_IsVisibleChanged"
+                              >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}" Foreground="{Binding DisplayColor}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <!-- For Checkboxes-->
+                    <CheckBox Grid.Row="1" Height="24" Grid.ColumnSpan="2" 
+                              IsChecked="{Binding SelectedValue.Value, ElementName=lstFilter}" 
+                              Visibility="{Binding SelectedFilterIsBoolean, Converter={StaticResource BoolToVisibilityConv}}" 
+                              VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Stackpanel for fitting all settings next to each other without spaces-->
+                <Label Grid.Row="1" Grid.Column="0" Content="More Options" Margin="0,38,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="84,44,0,0">
+                    <CheckBox 
+                        Height="24" 
+                        Content="Not" 
+                        IsChecked="{Binding SelectedValue.IsNot, ElementName=lstFilter}" 
+                        Click="CheckBox_Click" 
+                        IsEnabled="{Binding SelectedValue.ConditionType, ElementName=lstFilter, Converter={StaticResource FilterTypeToBoolConv}, ConverterParameter='allExCol', FallbackValue=false, TargetNullValue=false}"
+                        />
+                    <CheckBox 
+                        Height="24" 
+                        Content="Or" 
+                        IsChecked="{Binding SelectedValue.IsOr, ElementName=lstFilter}" 
+                        Click="CheckBox_Click" 
+                        IsEnabled="{Binding SelectedValue.ConditionType, ElementName=lstFilter, Converter={StaticResource FilterTypeToBoolConv}, ConverterParameter='allExCol', FallbackValue=false, TargetNullValue=false}"
+                        />
+                    <CheckBox 
+                        Height="24" 
+                        Content="Like" 
+                        IsChecked="{Binding SelectedValue.IsLike, ElementName=lstFilter}" 
+                        Click="CheckBox_Click"
+                        IsEnabled="{Binding SelectedValue.ConditionType, ElementName=lstFilter, Converter={StaticResource FilterTypeToBoolConv}, ConverterParameter='textbox', FallbackValue=false, TargetNullValue=false}"
+                        />
+                </StackPanel>
+
+                <Label Content="Condition description" Grid.Column="1" HorizontalAlignment="Left" Margin="0,37,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                <TextBox Grid.Column="1" Height="23" Margin="0,63,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SelectedValue.Description, ElementName=lstFilter}" VerticalAlignment="Top" />
+                
+                <Separator Grid.Row="1"  Grid.ColumnSpan="2" Margin="0,0,0,2" Height="7" VerticalAlignment="Bottom" />
+
+                <!-- Row 2-->
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,7" Orientation="Horizontal">
+                    <Label Content="Filtersetname:" Padding="0,2,0,0"/>
+                    <TextBox x:Name="txtSave" MinWidth="200" Margin="5,0,0,0" Text="{Binding SelectedValue.Title, ElementName=lstFilterOverview, Mode=TwoWay}"/>
+                    <CheckBox Content="Hide Filterset" VerticalContentAlignment="Center" Margin="5,0,0,0" IsChecked="{Binding SelectedValue.Hide, ElementName=lstFilterOverview, Mode=TwoWay}" />
+                </StackPanel>
+                
+
+            </Grid>
+
+
+        </GroupBox>
+        <Expander Grid.Column="2" ExpandDirection="Left">
+            <GroupBox Grid.Column="2" Header="Preview" Width="300">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshPreview" Grid.Row="0" Width="24" Height="24" Margin="0,1,264,5" Click="btnRefreshPreview_Click">
+                        <Image Source="/Tabs/ManageFilter/Images/refresh_16.png" Stretch="None"/>
+                    </Button>
+                    <ListBox Name="lstPreview" Grid.Row="1" ItemsSource="{Binding PreviewResult}" DisplayMemberPath="Name"/>
+                </Grid>
+            </GroupBox>
+        </Expander>
+
+
+
+    </Grid>
+</classes:TabBase>

@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="beRemote.GUI.Controls.FolderView.FolderListItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:folderView="clr-namespace:beRemote.GUI.Controls.FolderView"
+             mc:Ignorable="d" 
+             d:DesignHeight="20" d:DesignWidth="300"
+             x:Name="mainControl"
+             Width="auto"
+             Height="auto"
+             MinHeight="20"
+             >
+
+
+    <UserControl.Resources>
+        <folderView:IsCollapsedToLetterConverter x:Key="IsCollapsedToLetterConv"/>
+        <folderView:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="16"/> <!-- Expander-Column -->
+            <ColumnDefinition Width="auto" MinWidth="16"/> <!-- Icon-Column -->
+            <ColumnDefinition Width="*"/> <!-- Test-Column -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Content="{Binding IsCollapsed, Converter={StaticResource IsCollapsedToLetterConv}, ElementName=mainControl}" -->
+        <Button 
+            Grid.Column="0" 
+            Click="Button_Click" 
+            Visibility="{Binding HasSubItems, Converter={StaticResource BoolToVisibilityConv}, ElementName=mainControl}"
+            VerticalAlignment="Center"
+            >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Image 
+                        Source="{Binding IsCollapsed, Converter={StaticResource IsCollapsedToLetterConv}, ElementName=mainControl}" 
+                        Stretch="None" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        UseLayoutRounding="True"
+                        Width="9"
+                        Height="9"
+                        />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Image 
+            Grid.Column="1" 
+            Source="{Binding Value.ConnectionIcon, ElementName=mainControl}" 
+            VerticalAlignment="Center" />
+        <TextBlock 
+            Grid.Column="2" 
+            Text="{Binding Value.ConnectionName, ElementName=mainControl}" 
+            VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

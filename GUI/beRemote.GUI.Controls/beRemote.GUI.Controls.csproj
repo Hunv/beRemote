@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{918A9EFC-3656-4AAB-8F5C-5C4A0B5CA95C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>beRemote.GUI</RootNamespace>
+    <AssemblyName>beRemote.GUI.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <OutputPath>..\..\compiled\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="Hardcodet.Wpf.GenericTreeView, Version=1.0.6.33514, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Hardcodet.Wpf.GenericTreeView.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ImagedConnectionTreeViewClasses.cs" />
+    <Compile Include="Controls\ConnectionComboBox.xaml.cs">
+      <DependentUpon>ConnectionComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FolderView\BoolToVisibilityConverter.cs" />
+    <Compile Include="Controls\FolderView\FolderListItemControl.xaml.cs">
+      <DependentUpon>FolderListItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FolderView\FolderView.xaml.cs">
+      <DependentUpon>FolderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FolderView\IsCollapsedToLetterConverter.cs" />
+    <Compile Include="Controls\FolderView\SubConnectionsToBoolConverter.cs" />
+    <Compile Include="Controls\FolderView\RootLevelSpaceConverter.cs" />
+    <Compile Include="Controls\FolderView\ViewModel.cs" />
+    <Compile Include="Controls\ImagedConnectionTreeView.xaml.cs">
+      <DependentUpon>ImagedConnectionTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImagedConnectionTreeViewControl.xaml.cs" />
+    <Compile Include="Controls\LoadingCircle.xaml.cs">
+      <DependentUpon>LoadingCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumericUpDown.xaml.cs">
+      <DependentUpon>NumericUpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProtocolOptionGrid.xaml.cs">
+      <DependentUpon>ProtocolOptionGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TreeView\beTreeView.xaml.cs">
+      <DependentUpon>beTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TreeView\beTreeViewClasses.cs" />
+    <Compile Include="Controls\TreeView\ConnectionTree.cs" />
+    <Compile Include="Controls\TreeView\ViewModel\ConnectionItem.cs" />
+    <Compile Include="Controls\TreeView\ViewModel\ConnectionModel.cs" />
+    <Compile Include="Controls\TreeView\ViewModel\ConnectionUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\ConnectionComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FolderView\FolderListItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FolderView\FolderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImagedConnectionTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NumericUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProtocolOptionGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TreeView\beTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.ar-SA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.bg-BG.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.cs-CZ.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.de-DE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.dk-DK.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.el-GR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.es-ES.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.fa-IR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.fi-FI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.fr-FR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.he-IL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.hi-IN.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.hr-HR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.hu-HU.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.it-IT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.ko-KR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.nl-NL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.nn-NO.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.pl-PL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.ru-RU.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.se-SE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.tr-TR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.uk-UA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TreeView\Language\language.zh-CN.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\key16.png" />
+    <Resource Include="Images\redcross16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\infobubble24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\folder16.png" />
+    <Resource Include="Images\folderadd16.png" />
+    <Resource Include="Images\missing16.png" />
+    <Resource Include="Images\screen16.png" />
+    <Resource Include="Images\screenadd16.png" />
+    <Resource Include="Images\screenedit16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\downtriangle5x3.png" />
+    <Resource Include="Images\uptriangle5x3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\downtriangle7x4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\play16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pen16.png" />
+    <Resource Include="Images\user16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\greenplus16.png" />
+    <Resource Include="Images\question.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\downarrow_16.png" />
+    <Resource Include="Images\nocred_16.png" />
+    <Resource Include="Images\star_16.png" />
+    <Resource Include="Images\uparrow_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\FolderView\Images\advance.png" />
+    <Resource Include="Controls\FolderView\Images\collapse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\beRemote.Core.Definitions\beRemote.Core.Definitions.csproj">
+      <Project>{9e02b3c0-b0a2-4a92-a68d-313a71ba3f16}</Project>
+      <Name>beRemote.Core.Definitions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\beRemote.Core.Kernel\beRemote.Core.Kernel.csproj">
+      <Project>{f778bf03-dd4d-4dd2-93b5-34aa94449151}</Project>
+      <Name>beRemote.Core.Kernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\beRemote.Core.Common.EventSystem\beRemote.Core.Common.EventSystem\beRemote.Core.Common.EventSystem.csproj">
+      <Project>{ba0cfa0e-d72a-4422-93ab-14582a482355}</Project>
+      <Name>beRemote.Core.Common.EventSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\beRemote.Core.Common.Helper\beRemote.Core.Common.Helper.csproj">
+      <Project>{7144b6a8-38c2-4b6d-8d0c-10a44f7d959f}</Project>
+      <Name>beRemote.Core.Common.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\beRemote.Core.Common.LogSystem\beRemote.Core.Common.LogSystem.csproj">
+      <Project>{f02b9770-9b63-4544-aa6f-0b21dfa6222d}</Project>
+      <Name>beRemote.Core.Common.LogSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\beRemote.Core.Common.PluginBase\beRemote.Core.Common.PluginBase.csproj">
+      <Project>{74ba6693-5818-4fe5-88fb-21367f5ff8fb}</Project>
+      <Name>beRemote.Core.Common.PluginBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\ProtocolSystem\beRemote.Core.ProtocolSystem.ProtocolBase\beRemote.Core.ProtocolSystem.ProtocolBase.csproj">
+      <Project>{c4771f31-e3f2-4b8d-8ff0-b19532107052}</Project>
+      <Name>beRemote.Core.ProtocolSystem.ProtocolBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\StorageSystem\beRemote.Core.StorageSystem\beRemote.Core.StorageSystem\beRemote.Core.StorageSystem.StorageBase.csproj">
+      <Project>{831b8f1a-7618-4e03-bc7d-9ac4a5ba56d2}</Project>
+      <Name>beRemote.Core.StorageSystem.StorageBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

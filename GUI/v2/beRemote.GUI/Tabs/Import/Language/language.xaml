@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleImport">Import Connections</system:String>
+    
+    
+    <!-- GUI Content -->
+    <system:String x:Key="TabImportSource">Source Preferences</system:String>
+    <system:String x:Key="TabImportSourcePath">Select Sourcepath</system:String>
+    <system:String x:Key="TabImportMRemote">mRemote-File</system:String>
+    <system:String x:Key="TabImportMRemoteExample">i.e. C:\folder\confcons.xml</system:String>
+    <system:String x:Key="TabImportFolder">Folder</system:String>
+    <system:String x:Key="TabImportFolderExample">i.e. C:\myRdpFiles\</system:String>
+    <system:String x:Key="TabImportCsv">CSV-File</system:String>
+    <system:String x:Key="TabImportCsvExample">i.e. C:\myFiles\connections.csv</system:String>
+    <system:String x:Key="TabImportTarget">Select Target</system:String>
+    <system:String x:Key="TabImportStatus">Import Status</system:String>
+    <system:String x:Key="TabImportBtnStartImport">Start Import</system:String>
+    <system:String x:Key="TabImportBtnCancel">Cancel</system:String>
+    <system:String x:Key="TabImportStatusTitle">Job: </system:String>
+    <system:String x:Key="TabImportStatusStepsMax">Total Steps: </system:String>
+    <system:String x:Key="TabImportStatusStepsCurrent">Current Step: </system:String>
+    <system:String x:Key="TabImportStatusText">Current Activity: </system:String>
+    
+    <!-- Messages -->
+    <system:String x:Key="TabImportInformationMissing">Please define a Source for your import and specify a target folder in beRemote by selecting a folder from the folderlist.</system:String>
+    
+    <!-- beRemote Worker-Dialog -->
+    <system:String x:Key="TabImportbeRemoteTitle">Additional information</system:String>
+    <system:String x:Key="TabImportbeRemoteSelectUser">Select User that connections will be imported</system:String>
+    <system:String x:Key="TabImportbeRemoteDescription">All Folders and connections including the properties will be imported. Credentials are not possible to import.</system:String>
+    <system:String x:Key="TabImportbeRemoteStart">Start import</system:String>
+    <system:String x:Key="TabImportbeRemoteCancel">Cancel</system:String>
+    
+</ResourceDictionary>

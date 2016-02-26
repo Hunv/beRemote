@@ -1,0 +1,190 @@
+﻿<Grid x:Class="beRemote.GUI.Overlay.FirstRunWizard.OvFirstRunWizard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converter="clr-namespace:beRemote.GUI.Overlay.FirstRunWizard.Converter"
+             mc:Ignorable="d" 
+             Width="700"
+             Height="500"
+      x:Name="mainControl"
+      >
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converter:IsLastTabConverter x:Key="IsLastTabConv"/>
+            <converter:IsNotLastTabConverter x:Key="IsNotLastTabConv"/>
+            <converter:IsNotFirstTabConverter x:Key="IsNotFirstTabConv"/>
+        </ResourceDictionary>
+    </Grid.Resources>
+    <Grid Background="#FFE5E5E5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TabControl 
+            TabStripPlacement="Left" 
+            Grid.Row="0" 
+            Name="tabMain" 
+            SelectedIndex="{Binding SelectedTabIndex, ElementName=mainControl, Mode=TwoWay}"
+            HorizontalContentAlignment="Left"
+            Background="#FFE5E5E5"
+            
+            >
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/infobubble16.png" Stretch="None"/>
+                        <TextBlock Text="{StaticResource WizFirstRunTab1}" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="Images/infobubble256.png" Grid.RowSpan="2" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" Opacity="0.2"/>
+
+                    <Label Content="{StaticResource WizFirstRunTab1Text1}" Grid.Row="0" />
+                    <TextBlock Text="{StaticResource WizFirstRunTab1Text2}" Grid.Row="1" TextWrapping="Wrap" Margin="5" />
+
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/directions16.png" Stretch="None"/>
+                        <TextBlock Text="{StaticResource WizFirstRunTab2}" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Source="Images/directions256.png" Grid.RowSpan="3" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" Opacity="0.2"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="{StaticResource WizFirstRunTab2Text1}" Margin="5" Grid.Row="0"/>
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <RadioButton Margin="5" Content="{StaticResource WizFirstRunTab2ModeMu}" IsChecked="{Binding MultiUserModeSelected, ElementName=mainControl}" GroupName="rbgrpMode"/>
+                        <TextBlock TextWrapping="Wrap" Text="{StaticResource WizFirstRunTab2ModeMuDescription}" Margin="25,0,5,5"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Vertical">
+                        <RadioButton Margin="5" Content="{StaticResource WizFirstRunTab2ModeSu}" GroupName="rbgrpMode" IsChecked="{Binding SingleUserModeSelected, ElementName=mainControl}"/>
+                        <TextBlock TextWrapping="Wrap" Text="{StaticResource WizFirstRunTab2ModeSuDescription}" Margin="25,0,5,5"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- For Future use -->
+            <!--<TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/infobubble16.png" Stretch="None"/>
+                        <TextBlock Text="{StaticResource WizFirstRunTab3}" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Label Content="{StaticResource WizFirstRunTab3DatabaseType}" HorizontalAlignment="Left" Margin="6,-1,0,0" VerticalAlignment="Top"/>
+                    <ComboBox Margin="166,2,10,439" SelectedIndex="0" IsReadOnly="True">
+                        <ComboBoxItem Content="SQLite"/>
+                    </ComboBox>
+
+                    <TextBlock Text="{StaticResource WizFirstRunTab3PathDescription}" Margin="11,36,9,404"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Text="{Binding DatabasePath, ElementName=mainControl}"/>
+                    <Button Content="{StaticResource WizFirstRunTab3Browse}" HorizontalAlignment="Left" Margin="278,54,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+                </Grid>
+            </TabItem>-->
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/key16.png" Stretch="None"/>
+                        <TextBlock Text="{StaticResource WizFirstRunTab4}" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Image Source="Images/key256.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" Opacity="0.2"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{StaticResource WizFirstRunTab4SpecifySuperadmin}" VerticalAlignment="Top"/>
+                    <PasswordBox HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="200" Name="pbSuperadmin"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" Text="{StaticResource WizFirstRunTab4SpecifySuperadminDescription}" VerticalAlignment="Top" Width="524"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/flag_green16.png" Stretch="None"/>
+                        <TextBlock Text="{StaticResource WizFirstRunTab5}" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Image Source="Images/flag_green256.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" Opacity="0.2"/>
+                    
+                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{StaticResource WizFirstRunTab5Text}" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel HorizontalAlignment="Right"  Grid.Row="1" Orientation="Horizontal">
+            <Button 
+                HorizontalAlignment="Right" 
+                Width="80" 
+                Margin="3" 
+                Content="{StaticResource WizFirstRunBack}"
+                IsEnabled="{Binding SelectedIndex, ElementName=tabMain, Converter={StaticResource IsNotFirstTabConv}}"
+                Command="{Binding CmdBtnBack, ElementName=mainControl}"
+                />
+            <Button 
+                HorizontalAlignment="Right" 
+                Width="80" 
+                Margin="3" 
+                Content="{StaticResource WizFirstRunNext}"
+                IsEnabled="{Binding SelectedIndex, ElementName=tabMain, Converter={StaticResource IsNotLastTabConv}, ConverterParameter=3}"
+                Command="{Binding CmdBtnNext, ElementName=mainControl}"
+                />
+            <Button 
+                HorizontalAlignment="Right"
+                Width="100" 
+                Margin="3" 
+                Content="{StaticResource WizFirstRunFinish}"
+                IsEnabled="{Binding SelectedIndex, ElementName=tabMain, Converter={StaticResource IsLastTabConv}, ConverterParameter=3}"
+                Command="{Binding CmdBtnFinish, ElementName=mainControl}"
+                />
+        </StackPanel>
+
+    </Grid>
+</Grid>

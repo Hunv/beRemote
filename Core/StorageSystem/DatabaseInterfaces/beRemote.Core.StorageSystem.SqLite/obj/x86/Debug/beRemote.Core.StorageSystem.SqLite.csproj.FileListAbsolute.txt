@@ -1,0 +1,5 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.StorageSystem.SqLite.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.StorageSystem.SqLite.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\StorageSystem\DatabaseInterfaces\beRemote.Core.StorageSystem.SqLite\obj\x86\Debug\beRemote.Core.StorageSystem.SqLite.csprojResolveAssemblyReference.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\StorageSystem\DatabaseInterfaces\beRemote.Core.StorageSystem.SqLite\obj\x86\Debug\beRemote.Core.StorageSystem.SqLite.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\StorageSystem\DatabaseInterfaces\beRemote.Core.StorageSystem.SqLite\obj\x86\Debug\beRemote.Core.StorageSystem.SqLite.pdb

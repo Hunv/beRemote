@@ -1,0 +1,9 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.EventSystem.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.EventSystem.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.EventSystem\beRemote.Core.Common.EventSystem\obj\x64\Debug\beRemote.Core.Common.EventSystem.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.EventSystem\beRemote.Core.Common.EventSystem\obj\x64\Debug\beRemote.Core.Common.EventSystem.pdb
+D:\Productions\#programming\beRemote GIT\compiled\beRemote.Core.Common.EventSystem.dll
+D:\Productions\#programming\beRemote GIT\compiled\beRemote.Core.Common.EventSystem.pdb
+D:\Productions\#programming\beRemote GIT\Core\Common\beRemote.Core.Common.EventSystem\beRemote.Core.Common.EventSystem\obj\x64\Debug\beRemote.Core.Common.EventSystem.csprojResolveAssemblyReference.cache
+D:\Productions\#programming\beRemote GIT\Core\Common\beRemote.Core.Common.EventSystem\beRemote.Core.Common.EventSystem\obj\x64\Debug\beRemote.Core.Common.EventSystem.dll
+D:\Productions\#programming\beRemote GIT\Core\Common\beRemote.Core.Common.EventSystem\beRemote.Core.Common.EventSystem\obj\x64\Debug\beRemote.Core.Common.EventSystem.pdb

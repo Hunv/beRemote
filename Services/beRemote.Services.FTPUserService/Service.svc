@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="beRemote.Services.FTPUserService.Service" CodeBehind="Service.svc.cs" %>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F778BF03-DD4D-4DD2-93B5-34AA94449151}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>beRemote.Core</RootNamespace>
+    <AssemblyName>beRemote.Core.Kernel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Solutions\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>..\..\compiled\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandLineInterface\CliOptions.cs" />
+    <Compile Include="Host.cs" />
+    <Compile Include="InterComm\CommClient.cs" />
+    <Compile Include="InterComm\CommServer.cs" />
+    <Compile Include="InterComm\CommService.cs" />
+    <Compile Include="InterComm\ICommService.cs" />
+    <Compile Include="InterComm\InterCommEvents.cs" />
+    <Compile Include="Kernel.cs" />
+    <Compile Include="KernelEventId.cs" />
+    <Compile Include="KernelFailedEventArgs.cs" />
+    <Compile Include="KernelReadyEventArgs.cs" />
+    <Compile Include="ModuleState.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AbstractBeRemoteServiceClient.cs" />
+    <Compile Include="Services\CookieAwareWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\ServiceUrl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GUI\beRemote.GUI.Notification\beRemote.GUI.Notification.csproj">
+      <Project>{0ccac82b-29f5-4ef7-a1e9-54d782eeb6d3}</Project>
+      <Name>beRemote.GUI.Notification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GUI\beRemote.GUI.Plugins\beRemote.GUI.Plugins.csproj">
+      <Project>{46568e82-d11e-484c-9c4e-6db7c489e1d4}</Project>
+      <Name>beRemote.GUI.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\beRemote.Core.Definitions\beRemote.Core.Definitions.csproj">
+      <Project>{9e02b3c0-b0a2-4a92-a68d-313a71ba3f16}</Project>
+      <Name>beRemote.Core.Definitions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\beRemote.Core.Common.Helper\beRemote.Core.Common.Helper.csproj">
+      <Project>{7144b6a8-38c2-4b6d-8d0c-10a44f7d959f}</Project>
+      <Name>beRemote.Core.Common.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\beRemote.Core.Common.LogSystem\beRemote.Core.Common.LogSystem.csproj">
+      <Project>{f02b9770-9b63-4544-aa6f-0b21dfa6222d}</Project>
+      <Name>beRemote.Core.Common.LogSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\beRemote.Core.Common.PluginBase\beRemote.Core.Common.PluginBase.csproj">
+      <Project>{74ba6693-5818-4fe5-88fb-21367f5ff8fb}</Project>
+      <Name>beRemote.Core.Common.PluginBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\beRemote.Core.Common.SimpleSettings\beRemote.Core.Common.SimpleSettings.csproj">
+      <Project>{4e8175ca-a4fd-4e08-a6ae-12b40ebdcd2e}</Project>
+      <Name>beRemote.Core.Common.SimpleSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\beRemote.Core.Common.Vpn\beRemote.Core.Common.Vpn.csproj">
+      <Project>{3b85208f-88ba-4f69-8001-94ce58ef0971}</Project>
+      <Name>beRemote.Core.Common.Vpn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exceptions\beRemote.Core.Exceptions\beRemote.Core.Exceptions.csproj">
+      <Project>{3583d7b3-38b5-4d1d-8a2d-69b201b98311}</Project>
+      <Name>beRemote.Core.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MEF\beRemote.MEF\beRemote.MEF.csproj">
+      <Project>{9091677b-ad62-4b0c-a248-66c0ea4e8684}</Project>
+      <Name>beRemote.MEF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProtocolSystem\beRemote.Core.ProtocolSystem.ProtocolBase\beRemote.Core.ProtocolSystem.ProtocolBase.csproj">
+      <Project>{c4771f31-e3f2-4b8d-8ff0-b19532107052}</Project>
+      <Name>beRemote.Core.ProtocolSystem.ProtocolBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageSystem\beRemote.Core.StorageSystem\beRemote.Core.StorageSystem\beRemote.Core.StorageSystem.StorageBase.csproj">
+      <Project>{831b8f1a-7618-4e03-bc7d-9ac4a5ba56d2}</Project>
+      <Name>beRemote.Core.StorageSystem.StorageBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />  
+  
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

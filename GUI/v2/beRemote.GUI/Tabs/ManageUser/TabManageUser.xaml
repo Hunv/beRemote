@@ -1,0 +1,66 @@
+﻿<classes:TabBase x:Class="beRemote.GUI.Tabs.ManageUser.TabManageUser"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+               mc:Ignorable="d" 
+               d:DesignHeight="500" d:DesignWidth="435"
+               Loaded="UserControl_Loaded"
+               IconSource="Images/user16.png"
+               >
+    <classes:TabBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </classes:TabBase.Resources>
+    <classes:TabBase.Header>
+        <StaticResource ResourceKey="TabTitleManageUser"/>
+    </classes:TabBase.Header>
+
+
+    <Grid>
+        <ListBox HorizontalAlignment="Left" Margin="12,29,0,12" Name="lstUser" Width="123" SelectionChanged="lstUser_SelectionChanged" />
+        <Label Content="Username" Height="28" HorizontalAlignment="Left" Margin="12,9,0,0" Name="label1" VerticalAlignment="Top" />
+        <GroupBox Header="User Information" Height="193" HorizontalAlignment="Left" Margin="141,13,0,0" Name="groupBox1" VerticalAlignment="Top" Width="217">
+            <Grid>
+                <Label Content="Username" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label2" VerticalAlignment="Top" />
+                <Label Content="Winname" Height="28" HorizontalAlignment="Left" Margin="6,40,0,0" Name="label3" VerticalAlignment="Top" />
+                <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="6,68,0,0" Name="label4" VerticalAlignment="Top" />
+                <CheckBox Content="Superadmin" Height="16" HorizontalAlignment="Left" Margin="6,108,0,0" Name="chkSuperadmin" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="75,11,0,0" Name="txtUsername" VerticalAlignment="Top" Width="120" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="75,42,0,0" Name="txtWinname" VerticalAlignment="Top" Width="120" />
+                <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="6,141,0,0" Name="btnSave" VerticalAlignment="Top" Width="108" Click="btnSave_Click" />
+                <Button Content="Add as New" Height="23" HorizontalAlignment="Left" Margin="120,141,0,0" Name="btnAddAsNew" VerticalAlignment="Top" Width="75" Click="btnAddAsNew_Click" />
+                <PasswordBox HorizontalAlignment="Left" Margin="75,74,0,0" VerticalAlignment="Top" Width="120" Name="pbPassword"/>
+                <TextBlock HorizontalAlignment="Left" Margin="75,92,0,0" TextWrapping="Wrap" Text="*emtpy = no changes" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</classes:TabBase>

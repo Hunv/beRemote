@@ -1,0 +1,108 @@
+﻿<classes:TabBase x:Class="beRemote.VendorPlugins.DatabaseConverter.UI.DatabaseConverterControl"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                 xmlns:ui="clr-namespace:beRemote.VendorPlugins.DatabaseConverter.UI"
+                 mc:Ignorable="d" 
+                 d:DesignHeight="300" d:DesignWidth="310"
+                 IconSource="Images/databaseconverter.png"
+                 >
+
+    <classes:TabBase.DataContext>
+        <ui:ViewModel x:Name="viewModel" />
+    </classes:TabBase.DataContext>
+
+    <classes:TabBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Language/language.xaml"/>
+                <ResourceDictionary Source="../Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="../Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="../Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="../Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="../Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="../Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="../Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="../Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="../Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="../Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="../Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="../Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="../Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="../Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="../Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="../Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="../Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="../Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="../Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="../Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="../Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="../Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="../Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="../Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </classes:TabBase.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CmdLoaded, ElementName=viewModel}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <classes:TabBase.Header>
+        <StaticResource ResourceKey="PluginDbConverterTitle"/>
+    </classes:TabBase.Header>
+
+    <Grid>
+        <StackPanel Margin="5" Width="300" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <TextBlock 
+                Text="{StaticResource PluginDbConverterPathToDb}" 
+                TextWrapping="Wrap"
+                Margin="0,5,0,0"
+                />
+            
+            <TextBox
+                Text="{Binding SourceDbPath, ElementName=viewModel, UpdateSourceTrigger=PropertyChanged}"
+                />
+
+            <Button
+                Content="{StaticResource PluginDbConverterStart1}"
+                Margin="0,2,0,0"
+                Command="{Binding CmdStart, ElementName=viewModel}"
+                />
+            
+            <TextBlock 
+                Text="{StaticResource PluginDbConverterSelectUser}" 
+                TextWrapping="Wrap"
+                Margin="0,5,0,0"
+                IsEnabled="{Binding IsDbSelected, ElementName=viewModel}"
+                />
+
+            <ComboBox 
+                ItemsSource="{Binding UserList, ElementName=viewModel}"
+                SelectedValue="{Binding SelectedUserId, ElementName=viewModel}"
+                SelectedValuePath="Id"
+                DisplayMemberPath="Name"
+                IsEnabled="{Binding IsDbSelected, ElementName=viewModel}"
+                />
+
+            <TextBlock 
+                Text="{StaticResource PluginDbConverterDescription}" 
+                TextWrapping="Wrap"
+                IsEnabled="{Binding IsDbSelected, ElementName=viewModel}"
+                />
+
+            <Button
+                Content="{StaticResource PluginDbConverterStart2}"
+                Margin="0,2,0,0"
+                Command="{Binding CmdImport, ElementName=viewModel}"
+                IsEnabled="{Binding IsDbSelected, ElementName=viewModel}"
+                />
+
+        </StackPanel>
+    </Grid>
+</classes:TabBase>

@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- Ribbon -->
+    <system:String x:Key="RibTabHeadServer">Server</system:String>
+    <system:String x:Key="RibTabHeadSettings">Einstellungen</system:String>
+    <system:String x:Key="RibTabHeadToolsAndFeatures">Tools und Features</system:String>
+    <system:String x:Key="RibTabHeadHelp">Hilfe</system:String>
+
+    <system:String x:Key="RibServerGrpConnections">Verbindungen</system:String>
+    <system:String x:Key="RibServerGrpManage">Verwalten</system:String>
+    <system:String x:Key="RibServerGrpMore">Mehr</system:String>
+
+    <system:String x:Key="RibServerBtnAdd">Hinzufügen</system:String>
+    <system:String x:Key="RibServerBtnRemove">Entfernen</system:String>
+    <system:String x:Key="RibServerBtnAddFolder">Ordner hinzufügen</system:String>
+    <system:String x:Key="RibServerBtnCredentials">Anmeldedaten</system:String>
+    <system:String x:Key="RibServerBtnVpn">VPN</system:String>
+    <system:String x:Key="RibServerBtnHistory">Verlauf</system:String>
+    <system:String x:Key="RibServerBtnWhoIsOnline">Wer ist online</system:String>
+    
+</ResourceDictionary>

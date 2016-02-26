@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleManageConnection">Manage Connection</system:String>
+
+    <system:String x:Key="TabManageConnectionHostinformation">Hostinformation</system:String>
+    <system:String x:Key="TabManageConnectionIpHostname">IP or Hostname</system:String>
+    <system:String x:Key="TabManageConnectionDisplayname">Displayname</system:String>
+    <system:String x:Key="TabManageConnectionDescription">Description</system:String>
+    <system:String x:Key="TabManageConnectionOperatingSystem">Operating System</system:String>
+    <system:String x:Key="TabManageConnectionFolder">Folder</system:String>
+    <system:String x:Key="TabManageConnectionVpnConnection">VPN Connection</system:String>
+    <system:String x:Key="TabManageConnectionPublicConnection">Public Connection</system:String>
+    <system:String x:Key="TabManageConnectionAddNewProtocol">Add new protocol</system:String>
+    <system:String x:Key="TabManageConnectionProtocol">Protocol</system:String>
+    <system:String x:Key="TabManageConnectionAddProtocol">Add</system:String>
+    <system:String x:Key="TabManageConnectionAssignedProtocols">Assigned protocols</system:String>
+    <system:String x:Key="TabManageConnectionPort">Port</system:String>
+    <system:String x:Key="TabManageConnectionUseCredentials">UseCredentials</system:String>
+    <system:String x:Key="TabManageConnectionAddCredential">Add Credential</system:String>
+    <system:String x:Key="TabManageConnectionProtocolSettings">ProtocolSettings</system:String>
+    <system:String x:Key="TabManageConnectionSave">Save</system:String>
+    <system:String x:Key="TabManageConnectionCancel">Cancel</system:String>
+
+    <system:String x:Key="TabManageConnectionCredentialsUsername">Username</system:String>
+    <system:String x:Key="TabManageConnectionCredentialsPassword">Password</system:String>
+    <system:String x:Key="TabManageConnectionCredentialsDomain">Domain (optional)</system:String>
+    <system:String x:Key="TabManageConnectionCredentialsDescription">Description</system:String>
+    <system:String x:Key="TabManageConnectionCredentialsDescriptionText">Please enter a description</system:String>
+    <system:String x:Key="TabManageConnectionCredentialsAdd">Add Credential</system:String>
+</ResourceDictionary>

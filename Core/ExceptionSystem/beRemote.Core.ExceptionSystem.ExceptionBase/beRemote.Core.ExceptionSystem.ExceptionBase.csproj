@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{72B721F9-071E-4267-A7CA-6F43A39BED34}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>beRemote.Core.ExceptionSystem.ExceptionBase</RootNamespace>
+    <AssemblyName>beRemote.Core.ExceptionSystem.ExceptionBase</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\..\compiled\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\..\compiled\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>..\..\..\compiled\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>..\..\..\compiled\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="Exceptions\BERemoteException.cs" />
+    <Compile Include="Exceptions\InvalidDirectoryException.cs" />
+    <Compile Include="Exceptions\BERemoteGUIException.cs" />
+    <Compile Include="Exceptions\WebServiceBackendMisconfigured.cs" />
+    <Compile Include="Exceptions\SessionViewSizeInvalidException.cs" />
+    <Compile Include="Exceptions\LicenseInvalidException.cs" />
+    <Compile Include="Exceptions\ServerConfigurationInvalidException.cs" />
+    <Compile Include="Exceptions\PluginInvalidSettingsException.cs" />
+    <Compile Include="Exceptions\SessionIdInvalidException.cs" />
+    <Compile Include="Exceptions\InvalidUserCredentialsException.cs" />
+    <Compile Include="Exceptions\SessionInvalidException.cs" />
+    <Compile Include="Exceptions\ProtocolInvalidException.cs" />
+    <Compile Include="Exceptions\ProtocolInvalidIconException.cs" />
+    <Compile Include="Exceptions\PluginInvalidException.cs" />
+    <Compile Include="Exceptions\PluginsNotFoundException.cs" />
+    <Compile Include="Exceptions\ProtocolInvalidPortException.cs" />
+    <Compile Include="Exceptions\ProtocolInvalidSettingsException.cs" />
+    <Compile Include="ExceptionType.cs" />
+    <Compile Include="GUI\ExceptionWindow.xaml.cs">
+      <DependentUpon>ExceptionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\IHandler.cs" />
+    <Compile Include="Handler\LogHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\beRemote.Core.Common.LogSystem\beRemote.Core.Common.LogSystem.csproj">
+      <Project>{F02B9770-9B63-4544-AA6F-0B21DFA6222D}</Project>
+      <Name>beRemote.Core.Common.LogSystem</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Include="GUI\ExceptionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

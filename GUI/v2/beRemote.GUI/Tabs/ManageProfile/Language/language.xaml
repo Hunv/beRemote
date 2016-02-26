@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- TabTitles -->
+    <system:String x:Key="TabTitleManageProfile">Manage Profile</system:String>
+
+    <system:String x:Key="TabManageProfileTabSettings">Settings</system:String>
+    <system:String x:Key="TabManageProfileTabAdvanced">Advanced</system:String>    
+    <system:String x:Key="TabManageProfileTabProxySettings">Proxysettings</system:String>
+    <system:String x:Key="TabManageProfileTabStatistics">Statistics</system:String>
+    
+    <system:String x:Key="TabManageProfileUsername">Username</system:String>
+    <system:String x:Key="TabManageProfileDisplayname">Displayname</system:String>
+    <system:String x:Key="TabManageProfileChangePassword">Change Password</system:String>
+    <system:String x:Key="TabManageProfileOldPassword">Old Password</system:String>
+    <system:String x:Key="TabManageProfileNewPassword">New Password</system:String>
+    <system:String x:Key="TabManageProfileRepeatPassword">Repeat new Password</system:String>
+    <system:String x:Key="TabManageProfileProxySettings">Proxy Settings: </system:String>
+    <system:String x:Key="TabManageProfileNoProxy">No Proxy</system:String>
+    <system:String x:Key="TabManageProfileUseSystemSettings">Use System Settings</system:String>
+    <system:String x:Key="TabManageProfileUseCustomSettings">Use Custom Settings</system:String>
+    <system:String x:Key="TabManageProfileProxyHostname">Proxy Hostname:</system:String>
+    <system:String x:Key="TabManageProfileProxyPort">Proxy Port:</system:String>
+    <system:String x:Key="TabManageProfileProxyCredentials">Proxy Credentials:</system:String>
+    <system:String x:Key="TabManageProfileUseCurrentCredentials">Use Current Credentials</system:String>
+    <system:String x:Key="TabManageProfileNoCredentials">No Credentials</system:String>
+    <system:String x:Key="TabManageProfileBypassProxy">Bypass Proxy for local Addresses</system:String>
+    <system:String x:Key="TabManageProfileStoreSettingsLocal">Use settings only on this Computer</system:String>
+    <system:String x:Key="TabManageProfileSave">Save</system:String>
+    <system:String x:Key="TabManageProfileCancel">Cancel</system:String>
+
+    <system:String x:Key="TabManageProfileErrorDisplayname">Displayname cannot be empty</system:String>
+    <system:String x:Key="TabManageProfileErrorDisplaynameTitle">Unvalid Displayname</system:String>
+    <system:String x:Key="TabManageProfileErrorNewPasswordToShort">The new password is to short. Please enter a password, that matches the required lenght.</system:String>
+    <system:String x:Key="TabManageProfileErrorNewPasswordToShortTitle">Invalid new password</system:String>
+    <system:String x:Key="TabManageProfileErrorNewPasswordUnmatch">The new password is not matching. Please retype the new password in both password fields.</system:String>
+    <system:String x:Key="TabManageProfileErrorNewPasswordUnmatchTitle">New passwords not matching.</system:String>
+    <system:String x:Key="TabManageProfileErrorOldPassword">The old password you entered is wrong.</system:String>
+    <system:String x:Key="TabManageProfileErrorOldPasswordTitle">Password vrong.</system:String>
+
+    <system:String x:Key="TabManageProfileAdvancedDeleteQuickConnect">Delete Quick Connect connections on exit</system:String>
+    <system:String x:Key="TabManageProfileAdvancedDefaultFolder">Default Folder</system:String>
+    <system:String x:Key="TabManageProfileAdvancedDefaultProtocol">Default Protocol</system:String>
+    
+</ResourceDictionary>

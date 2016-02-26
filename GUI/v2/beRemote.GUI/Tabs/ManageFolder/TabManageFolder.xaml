@@ -1,0 +1,89 @@
+﻿<classes:TabBase xmlns:FolderView="clr-namespace:beRemote.GUI.Controls.FolderView;assembly=beRemote.GUI.Controls"  x:Class="beRemote.GUI.Tabs.ManageFolder.TabManageFolder"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+                 xmlns:manageFolder="clr-namespace:beRemote.GUI.Tabs.ManageFolder"
+                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                 mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300"
+                 IconSource="Images/folder16.png"
+                 x:Name="mainControl"
+                 IsMultiTab="False"
+               >
+    <classes:TabBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <manageFolder:BoolToBoolInverseConverter x:Key="BoolToBoolInverseConv"/>
+        </ResourceDictionary>
+    </classes:TabBase.Resources>
+    <classes:TabBase.Header>
+        <StaticResource ResourceKey="TabTitleManageFolder"/>
+    </classes:TabBase.Header>
+    <classes:TabBase.DataContext>
+        <manageFolder:ViewModel/>
+    </classes:TabBase.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CmdTabManageFolderLoaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <TextBlock Text="{StaticResource TabManageFolderFoldername}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="10,26,10,0" TextWrapping="Wrap" Text="{Binding NewFolderName}" VerticalAlignment="Top" />
+
+        <CheckBox Content="{StaticResource TabManageFolderPublic}" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" IsChecked="{Binding IsPublic}"/>
+
+        <CheckBox Content="{StaticResource TabManageFolderIsRoot}" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" IsChecked="{Binding IsRoot}"/>
+
+        <TextBlock Text="{StaticResource TabManageFolderParentFolder}" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
+        <FolderView:FolderView 
+            Margin="10,110,10,56" 
+            ItemList="{Binding FolderList}" 
+            SelectedValue="{Binding SelectedFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            IsEnabled="{Binding IsRoot, Converter={StaticResource BoolToBoolInverseConv}}"
+            />
+
+        <CheckBox Content="{StaticResource TabManageFolderKeepOpen}" HorizontalAlignment="Left" Margin="10,0,0,36" VerticalAlignment="Bottom" IsChecked="{Binding KeepOpen}"/>
+
+        <Button 
+            Content="Add Folder" 
+            Margin="10,0,0,10" 
+            HorizontalAlignment="Left" 
+            Width="280" 
+            Height="21" 
+            VerticalAlignment="Bottom" 
+            Command="{Binding CmdTabManageFolderAddFolderClick}" 
+            CommandParameter="{Binding ElementName=mainControl}"
+            />
+
+
+    </Grid>
+</classes:TabBase>

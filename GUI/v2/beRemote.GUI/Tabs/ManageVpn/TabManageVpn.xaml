@@ -1,0 +1,576 @@
+﻿<classes:TabBase x:Class="beRemote.GUI.Tabs.ManageVpn.TabManageVpn"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+               xmlns:sys="clr-namespace:System;assembly=mscorlib"
+               xmlns:vpn="clr-namespace:beRemote.Core.Common.Vpn;assembly=beRemote.Core.Common.Vpn"
+               xmlns:tabManageVpn="clr-namespace:beRemote.GUI.Tabs.ManageVpn"
+               xmlns:classes="clr-namespace:beRemote.Core.Definitions.Classes;assembly=beRemote.Core.Definitions"
+               xmlns:converter="clr-namespace:beRemote.GUI.Tabs.ManageVpn.Converter"
+               xmlns:vmVpn="clr-namespace:beRemote.GUI.Tabs.ManageVpn.ViewModel"
+               mc:Ignorable="d" 
+               d:DesignHeight="400" d:DesignWidth="800"
+               IconSource="Images/vpn_16.png"
+               IsMultiTab="False"
+               x:Name="mainVpnTab"
+               >
+
+    <classes:TabBase.DataContext>
+        <vmVpn:ViewModelVpn x:Name="viewModel"/>
+    </classes:TabBase.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CmdVpnTabLoaded}" CommandParameter="{Binding ElementName=mainVpnTab}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding CmdVpnTabUnloaded}" CommandParameter="{Binding ElementName=mainVpnTab}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <classes:TabBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Language/language.xaml"/>
+                <ResourceDictionary Source="Language/language.de-DE.xaml"/>
+                <ResourceDictionary Source="Language/language.es-ES.xaml"/>
+                <ResourceDictionary Source="Language/language.fr-FR.xaml"/>
+                <ResourceDictionary Source="Language/language.it-IT.xaml"/>
+                <ResourceDictionary Source="Language/language.nl-NL.xaml"/>
+                <ResourceDictionary Source="Language/language.pl-PL.xaml"/>
+                <ResourceDictionary Source="Language/language.ru-RU.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+                <ResourceDictionary Source="Language/language.cs-CZ.xaml"/>
+                <ResourceDictionary Source="Language/language.ar-SA.xaml"/>
+                <ResourceDictionary Source="Language/language.bg-BG.xaml"/>
+                <ResourceDictionary Source="Language/language.dk-DK.xaml"/>
+                <ResourceDictionary Source="Language/language.el-GR.xaml"/>
+                <ResourceDictionary Source="Language/language.fa-IR.xaml"/>
+                <ResourceDictionary Source="Language/language.fi-FI.xaml"/>
+                <ResourceDictionary Source="Language/language.he-IL.xaml"/>
+                <ResourceDictionary Source="Language/language.hi-IN.xaml"/>
+                <ResourceDictionary Source="Language/language.hr-HR.xaml"/>
+                <ResourceDictionary Source="Language/language.hu-HU.xaml"/>
+                <ResourceDictionary Source="Language/language.ko-KR.xaml"/>
+                <ResourceDictionary Source="Language/language.nn-NO.xaml"/>
+                <ResourceDictionary Source="Language/language.se-SE.xaml"/>
+                <ResourceDictionary Source="Language/language.tr-TR.xaml"/>
+                <ResourceDictionary Source="Language/language.zh-CN.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="enumVpnType">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="vpn:VpnType" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>            
+            <converter:VpnTypeToIntConverter x:Key="VpnTypeToIntConv"/>
+            <converter:IsNotNull x:Key="IsNotNullConv"/>
+
+            <DataTemplate x:Key="DataTemplateVpnListStyle">
+                <Grid HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="22"/>
+                        <RowDefinition Height="22"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="22"/>
+                        <ColumnDefinition Width="22"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Name of VPN Connection -->
+                    <TextBlock 
+                        Text="{Binding Name}" 
+                        Grid.Row="0"
+                        Grid.ColumnSpan="3"
+                        VerticalAlignment="Bottom"
+                        Margin="3,0,0,0"       
+                        HorizontalAlignment="Left"
+                        />
+
+                    <!-- Type of VPN Connection -->
+                    <Image
+                        VerticalAlignment="Top"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Width="16"
+                        Height="16"
+                        Name="imgType"
+                        HorizontalAlignment="Left"
+                        >
+                        <Image.ToolTip>
+                            <ToolTip>
+                                <Label Content="{StaticResource TabVpnTooltipImageType}"/>
+                            </ToolTip>
+                        </Image.ToolTip>
+                    </Image>
+
+                    <!-- Credentials of VPN Connection -->
+                    <Image
+                        VerticalAlignment="Top"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="16"
+                        Height="16"
+                        Name="imgCredentials"
+                        Source="Images\dialog.png"  
+                        HorizontalAlignment="Left"
+                        >
+                        <Image.ToolTip>
+                            <ToolTip>
+                                <Label Content="{StaticResource TabVpnTooltipImageCredentials}"/>
+                            </ToolTip>
+                        </Image.ToolTip>
+                    </Image>
+
+                    <!-- IsValid of VPN Connection -->
+                    <Image
+                        VerticalAlignment="Top"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Width="16"
+                        Height="16"
+                        Name="imgValid"
+                        Source="Images\cross.png"    
+                        HorizontalAlignment="Left"
+                        >
+                        <Image.ToolTip>
+                            <ToolTip>
+                                <Label Content="{StaticResource TabVpnTooltipImageValid}"/>
+                            </ToolTip>
+                        </Image.ToolTip>
+                    </Image>
+                </Grid>
+                <DataTemplate.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="0"/>                            
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgType" Property="Source" Value="Images\dialog.png"/>
+                        <Setter TargetName="imgCredentials" Property="Source" Value="{x:Null}"/>
+                        <Setter TargetName="imgValid" Property="Source" Value="{x:Null}"/>
+                    </MultiDataTrigger>
+
+<!-- CISCO START -->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="1"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgType" Property="Source" Value="Images\cisco.png"/>
+                    </MultiDataTrigger>
+
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="1"/>
+                            <Condition Binding="{Binding Parameter3}" Value="False"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgCredentials" Property="Source" Value="Images\key.png"/>
+                    </MultiDataTrigger>
+
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="1"/>
+                            <Condition Binding="{Binding IsValid}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgValid" Property="Source" Value="Images\check_16.png"/>
+                    </MultiDataTrigger>
+
+<!-- OPENVPN START -->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="2"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgType" Property="Source" Value="Images\openvpn.png"/>
+                        <Setter TargetName="imgCredentials" Property="Source" Value="{x:Null}"/>
+                    </MultiDataTrigger>
+                    
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="2"/>
+                            <Condition Binding="{Binding IsValid}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgValid" Property="Source" Value="Images\check_16.png"/>
+                    </MultiDataTrigger>
+
+<!-- WINDOWS VPN START -->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="3"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgType" Property="Source" Value="Images\windowsvpn.png"/>
+                    </MultiDataTrigger>
+
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="3"/>
+                            <Condition Binding="{Binding Parameter3}" Value="False"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgCredentials" Property="Source" Value="Images\key.png"/>
+                    </MultiDataTrigger>
+
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="3"/>
+                            <Condition Binding="{Binding IsValid}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgValid" Property="Source" Value="Images\check_16.png"/>
+                    </MultiDataTrigger>
+                    
+<!-- SHREWSOFT VPN START -->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="4"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgType" Property="Source" Value="Images\shrewsoftvpn.png"/>
+                    </MultiDataTrigger>
+
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="4"/>
+                            <Condition Binding="{Binding Parameter3}" Value="False"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgCredentials" Property="Source" Value="Images\key.png"/>
+                    </MultiDataTrigger>
+
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Type}" Value="4"/>
+                            <Condition Binding="{Binding IsValid}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="imgValid" Property="Source" Value="Images\check_16.png"/>
+                    </MultiDataTrigger>
+
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ResourceDictionary>
+    </classes:TabBase.Resources>
+    <classes:TabBase.Header>
+        <StaticResource ResourceKey="TabTitleManageVpn"/>
+    </classes:TabBase.Header>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Column="0">
+            <TextBlock 
+                Text="{StaticResource TabVpnVpnProfiles}" 
+                DockPanel.Dock="Top"
+                />
+            <ListBox 
+                Name="lstVpnProfiles" 
+                DockPanel.Dock="Top" 
+                ItemsSource="{Binding VpnList, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                SelectedItem="{Binding SelectedVpn}"
+                ItemTemplate="{StaticResource DataTemplateVpnListStyle}"
+                >
+            </ListBox>
+        </DockPanel>
+
+        <GridSplitter Width="3" Grid.Column="0"/>
+
+        <Grid Grid.Column="1">
+            <TextBlock 
+                Text="{StaticResource TabVpnVpnType}" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="150" 
+                Margin="10,15,0,0"
+                />
+            <ComboBox 
+                Name="cmbMethod" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="150" 
+                Margin="10,30,0,0" 
+                ItemsSource="{Binding Source={StaticResource enumVpnType}}" 
+                SelectedIndex="{Binding SelectedVpn.TypeId, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding SelectedVpn, Converter={StaticResource IsNotNullConv}}"
+                />
+            
+            <TextBlock 
+                Text="{StaticResource TabVpnVpnDescription}" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="150" 
+                Margin="10,55,0,0"
+                />
+            <TextBox 
+                Text="{Binding SelectedItem.Name, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="200" 
+                Margin="10,70,0,0" 
+                IsEnabled="{Binding SelectedVpn, Converter={StaticResource IsNotNullConv}}"
+                />
+            
+            <TabControl 
+                Margin="10,96,10,10" 
+                SelectedIndex="{Binding SelectedIndex, ElementName=cmbMethod}"
+                IsEnabled="{Binding SelectedVpn, Converter={StaticResource IsNotNullConv}}"
+                >
+                <TabItem 
+                    Header="{StaticResource TabVpnSelectVpnType}" 
+                    Visibility="Collapsed"
+                    >
+                    <Grid Background="#FFE5E5E5">
+                        <StackPanel Orientation="Vertical" Margin="3,0,0,0">
+                            <TextBlock Text="{StaticResource TabVpnSelectVpnTypeAbove}"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem 
+                    Header="Cisco VPN" 
+                    Visibility="Collapsed"
+                    >
+                    <Grid Background="#FFE5E5E5">
+                        <StackPanel Orientation="Vertical" Margin="3,0,0,0">
+                            <TextBlock 
+                                Text="{StaticResource TabVpnCiscoName}"
+                                />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
+                                    Width="300" 
+                                    HorizontalAlignment="Left" 
+                                    Text="{Binding SelectedItem.Parameter1, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+                                <Button Content="?" Width="20" Margin="2,0,0,0">
+                                    <Button.ToolTip>
+                                        <Image Source="/Tabs/ManageVpn/Images/CiscoVpnConnectionEntry.png" Stretch="Fill"/>
+                                    </Button.ToolTip>
+                                </Button>
+                            </StackPanel>
+                            <TextBlock 
+                                Text="{StaticResource TabVpnCiscoPath}" 
+                                Margin="0,5,0,0"
+                                />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
+                                    Width="300" 
+                                    HorizontalAlignment="Left" 
+                                    Text="{Binding SelectedItem.Parameter2, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+                                <Button 
+                                    Content="..." 
+                                    Width="20" 
+                                    Margin="2,0,0,0" 
+                                    Name="btnCiscoVpnPathBrowse" 
+                                    Command="{Binding CmdVpnTabBrowse}"
+                                    CommandParameter="c1"
+                                    />
+                            </StackPanel>
+                            <GroupBox 
+                                HorizontalAlignment="Left" 
+                                VerticalAlignment="Top" 
+                                Header="{StaticResource TabVpnCiscoAuthentication}" 
+                                Margin="0,5,0,0"
+                                >
+                                <StackPanel Margin="0,5,0,0">
+                                    <RadioButton 
+                                        Content="{StaticResource TabVpnCiscoShowAuthDialog}" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        IsChecked="{Binding SelectedItem.Parameter3, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                        />
+                                    <RadioButton 
+                                        Content="{StaticResource TabVpnCiscoUseCredentials}" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        Name="rbCiscoCred2" 
+                                        Margin="0,3,0,0" 
+                                        IsChecked="True"
+                                        />
+                                    <ComboBox 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        MinWidth="270" 
+                                        Margin="20,0,0,0" 
+                                        IsEnabled="{Binding IsChecked, ElementName=rbCiscoCred2}" 
+                                        ItemsSource="{Binding VpnUserCredentials}" 
+                                        SelectedValue="{Binding SelectedItem.Parameter4, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}" 
+                                        DisplayMemberPath="Description" 
+                                        SelectedValuePath="Id"
+                                        />
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="OpenVPN" Visibility="Collapsed">
+                    <Grid Background="#FFE5E5E5">
+                        <StackPanel Orientation="Vertical" Margin="3,0,0,0">
+                            <TextBlock 
+                                Text="{StaticResource TabVpnOpenFile}"
+                                />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
+                                    Width="300" 
+                                    HorizontalAlignment="Left" 
+                                    Text="{Binding SelectedItem.Parameter1, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+                                <Button 
+                                    Content="..." 
+                                    Name="btnOpenVpnConfigPathBrowse" 
+                                    Width="20"
+                                    Command="{Binding CmdVpnTabBrowse}"
+                                    CommandParameter="o1"
+                                    />
+                            </StackPanel>
+                            <TextBlock 
+                                Text="{StaticResource TabVpnOpenExe}" 
+                                Margin="0,5,0,0"
+                                />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
+                                    Width="300" 
+                                    HorizontalAlignment="Left" 
+                                    Text="{Binding SelectedItem.Parameter2, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+                                <Button 
+                                    Content="..." 
+                                    Name="btnOpenVpnExePathBrowse" 
+                                    Width="20"
+                                    Command="{Binding CmdVpnTabBrowse}"
+                                    CommandParameter="o2"
+                                    />
+                            </StackPanel>
+                            <TextBlock
+                                Text="{StaticResource TabVpnOpenHelp}"
+                                />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem 
+                    Header="Windows VPN" 
+                    Visibility="Collapsed"
+                    >
+                    <Grid Background="#FFE5E5E5">
+                        <StackPanel Orientation="Vertical" Margin="3,0,0,0">
+                            <TextBlock 
+                                Text="{StaticResource TabVpnWinName}"
+                                />
+                            <TextBox 
+                                Width="300" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left" 
+                                Text="{Binding SelectedItem.Parameter1, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                />
+                            <GroupBox 
+                                HorizontalAlignment="Left" 
+                                VerticalAlignment="Top" 
+                                Header="{StaticResource TabVpnWinAuthentication}" 
+                                Margin="0,5,0,0"
+                                >
+                                <StackPanel Margin="0,5,0,0">
+                                    <RadioButton 
+                                        Content="{StaticResource TabVpnWinShowAuthDialog}" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        IsChecked="{Binding SelectedItem.Parameter3, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                        />
+                                    <RadioButton 
+                                        Content="{StaticResource TabVpnWinUseCredentials}" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        Name="rbWindowsCred2" 
+                                        Margin="0,3,0,0" 
+                                        IsChecked="True"
+                                        />
+                                    <ComboBox 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        MinWidth="270" 
+                                        Margin="20,2,0,0" 
+                                        IsEnabled="{Binding IsChecked, ElementName=rbWindowsCred2}" 
+                                        ItemsSource="{Binding VpnUserCredentials}" 
+                                        SelectedValue="{Binding SelectedItem.Parameter4, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}" 
+                                        DisplayMemberPath="Description" 
+                                        SelectedValuePath="Id"
+                                        />
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem 
+                    Header="Shrew Soft VPN" 
+                    Visibility="Collapsed"
+                    >
+                    <Grid Background="#FFE5E5E5">
+                        <StackPanel Orientation="Vertical" Margin="3,0,0,0">
+                            <TextBlock 
+                                Text="{StaticResource TabVpnShrewName}"
+                                />
+                            <TextBox 
+                                Width="300" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left" 
+                                Text="{Binding SelectedItem.Parameter1, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                />
+                            <TextBlock 
+                                Text="{StaticResource TabVpnShrewIpsec}" 
+                                Margin="0,3,0,0"
+                                />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
+                                    Width="300" 
+                                    HorizontalAlignment="Left" 
+                                    Text="{Binding SelectedItem.Parameter2, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+                                <Button 
+                                    Content="..." 
+                                    Name="btnShrewSoftVpnExePathBrowse" 
+                                    Width="20"
+                                    Command="{Binding CmdVpnTabBrowse}"
+                                    CommandParameter="s1"
+                                    />
+                                <!--Click="btnShrewSoftVpnExePathBrowse_Click"-->
+                            </StackPanel>
+                            <GroupBox 
+                                HorizontalAlignment="Left" 
+                                VerticalAlignment="Top" 
+                                Header="{StaticResource TabVpnShrewAuthentication}" 
+                                Margin="0,5,0,0"
+                                >
+                                <StackPanel Margin="0,5,0,0">
+                                    <RadioButton 
+                                        Content="{StaticResource TabVpnShrewShowAuthDialog}" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        IsChecked="{Binding SelectedItem.Parameter3, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}"
+                                        />
+                                    <RadioButton 
+                                        Content="{StaticResource TabVpnShrewUseCredentials}" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        Name="rbShrewSoftCred2" 
+                                        Margin="0,3,0,0" 
+                                        IsChecked="True"
+                                        />
+                                    <ComboBox 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        MinWidth="270" 
+                                        Margin="20,2,0,0" 
+                                        IsEnabled="{Binding IsChecked, ElementName=rbShrewSoftCred2}" 
+                                        ItemsSource="{Binding VpnUserCredentials}" 
+                                        SelectedValue="{Binding SelectedItem.Parameter4, ElementName=lstVpnProfiles, UpdateSourceTrigger=PropertyChanged}" 
+                                        DisplayMemberPath="Description" 
+                                        SelectedValuePath="Id"
+                                        />
+                                </StackPanel>
+                            </GroupBox>
+                            <TextBlock Text="{StaticResource TabVpnShrewHelp1}"/>
+                            <TextBlock Text="{StaticResource TabVpnShrewHelp2}" Foreground="DarkRed"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</classes:TabBase>

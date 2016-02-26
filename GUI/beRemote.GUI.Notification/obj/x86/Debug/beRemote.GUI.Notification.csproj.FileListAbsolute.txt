@@ -1,0 +1,11 @@
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.GUI.Notification.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.GUI.Notification.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\NotificationWindow.baml
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\NotificationWindow.g.cs
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\beRemote.GUI.Notification_MarkupCompile.cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\beRemote.GUI.Notification.g.resources
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\beRemote.GUI.Notification.Properties.Resources.resources
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\beRemote.GUI.Notification.csproj.GenerateResource.Cache
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\beRemote.GUI.Notification.dll
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\beRemote.GUI.Notification.pdb
+D:\Productions\#programming\beRemote\beRemote\trunk\GUI\beRemote.GUI.Notification\obj\x86\Debug\beRemote.GUI.Notification.csprojResolveAssemblyReference.cache
