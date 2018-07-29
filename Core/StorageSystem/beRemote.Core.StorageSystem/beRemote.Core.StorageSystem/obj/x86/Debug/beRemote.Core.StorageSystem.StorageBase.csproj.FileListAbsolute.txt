@@ -1,5 +1,0 @@
-D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.StorageSystem.dll
-D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.StorageSystem.pdb
-D:\Productions\#programming\beRemote\beRemote\trunk\Core\StorageSystem\beRemote.Core.StorageSystem\beRemote.Core.StorageSystem\obj\x86\Debug\beRemote.Core.StorageSystem.StorageBase.csprojResolveAssemblyReference.cache
-D:\Productions\#programming\beRemote\beRemote\trunk\Core\StorageSystem\beRemote.Core.StorageSystem\beRemote.Core.StorageSystem\obj\x86\Debug\beRemote.Core.StorageSystem.dll
-D:\Productions\#programming\beRemote\beRemote\trunk\Core\StorageSystem\beRemote.Core.StorageSystem\beRemote.Core.StorageSystem\obj\x86\Debug\beRemote.Core.StorageSystem.pdb

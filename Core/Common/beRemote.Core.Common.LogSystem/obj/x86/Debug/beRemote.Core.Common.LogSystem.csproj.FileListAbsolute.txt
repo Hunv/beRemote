@@ -1,5 +1,0 @@
-D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.LogSystem.dll
-D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Core.Common.LogSystem.pdb
-D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.LogSystem\obj\x86\Debug\beRemote.Core.Common.LogSystem.dll
-D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.LogSystem\obj\x86\Debug\beRemote.Core.Common.LogSystem.pdb
-D:\Productions\#programming\beRemote\beRemote\trunk\Core\Common\beRemote.Core.Common.LogSystem\obj\x86\Debug\beRemote.Core.Common.LogSystem.csprojResolveAssemblyReference.cache

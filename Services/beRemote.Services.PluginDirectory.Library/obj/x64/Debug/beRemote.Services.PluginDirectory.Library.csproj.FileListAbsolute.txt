@@ -1,9 +1,0 @@
-D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Services.PluginDirectory.Library.dll
-D:\Productions\#programming\beRemote\beRemote\trunk\compiled\beRemote.Services.PluginDirectory.Library.pdb
-D:\Productions\#programming\beRemote\beRemote\trunk\Services\beRemote.Services.PluginDirectory.Library\obj\x64\Debug\beRemote.Services.PluginDirectory.Library.dll
-D:\Productions\#programming\beRemote\beRemote\trunk\Services\beRemote.Services.PluginDirectory.Library\obj\x64\Debug\beRemote.Services.PluginDirectory.Library.pdb
-D:\Productions\#programming\beRemote GIT\Services\beRemote.Services.PluginDirectory.Library\obj\x64\Debug\beRemote.Services.PluginDirectory.Library.dll
-D:\Productions\#programming\beRemote GIT\Services\beRemote.Services.PluginDirectory.Library\obj\x64\Debug\beRemote.Services.PluginDirectory.Library.pdb
-D:\Productions\#programming\beRemote GIT\compiled\beRemote.Services.PluginDirectory.Library.dll
-D:\Productions\#programming\beRemote GIT\compiled\beRemote.Services.PluginDirectory.Library.pdb
-D:\Productions\#programming\beRemote GIT\Services\beRemote.Services.PluginDirectory.Library\obj\x64\Debug\beRemote.Services.PluginDirectory.Library.csprojResolveAssemblyReference.cache
