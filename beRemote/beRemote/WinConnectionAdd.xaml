@@ -1,0 +1,70 @@
+﻿<Window x:Class="beRemote.WinConnectionAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:beRemote"
+        mc:Ignorable="d"
+        Title="WinConnectionAdd" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="Connection Type"/>
+                <ComboBox MinWidth="100"/>
+            </StackPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="125"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Host Address" Grid.Column="0" Grid.Row="0"/>
+                <TextBox MinWidth="100" Grid.Column="1" Grid.Row="0"/>
+
+                <Label Content="Displayname" Grid.Column="0" Grid.Row="1"/>
+                <TextBox MinWidth="100" Grid.Column="1" Grid.Row="1"/>
+                
+                <Label Content="Description" Grid.Column="0" Grid.Row="2"/>
+                <TextBox MinWidth="100" Grid.Column="1" Grid.Row="2"/>
+
+                <Label Content="Operating System" Grid.Column="0" Grid.Row="3"/>
+                <TextBox MinWidth="100" Text="auto" Grid.Column="1" Grid.Row="3"/>
+
+                <Label Content="Folder" Grid.Column="0" Grid.Row="4"/>
+                <TextBox MinWidth="100" Text="auto" Grid.Column="1" Grid.Row="4"/>
+
+                <Label Content="VPN" Grid.Column="0" Grid.Row="5"/>
+                <TextBox MinWidth="100" Text="none" Grid.Column="1" Grid.Row="5"/>
+            </Grid>
+            
+            
+            
+            
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

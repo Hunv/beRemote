@@ -1,12 +1,295 @@
-﻿<Window x:Class="beRemote.MainWindow"
+﻿<Fluent:RibbonWindow x:Class="beRemote.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:Fluent="urn:fluent-ribbon"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:beRemote"
+        xmlns:conv="clr-namespace:beRemote.Converter"
+        xmlns:p="clr-namespace:beRemote.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{x:Static p:Resources.MW_Title}" 
+        Height="450" 
+        Width="800"
+        >
+
+    <Fluent:RibbonWindow.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+    </Fluent:RibbonWindow.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Fluent:Ribbon Grid.Row="0">
+            <!-- Menu -->
+            <Fluent:Ribbon.Menu>
+                <Grid>
+                    <Fluent:Backstage>
+                        <Fluent:BackstageTabControl>
+                            <Fluent:Button Header="{x:Static p:Resources.MW_RibMenuBtnFavorites}"
+                                           Icon="/beRemote;component/Images/star_32.png"
+                                           Fluent:KeyTip.Keys="F"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnFavorites"
+                                           />                            
+                            <Fluent:Button Header="{x:Static p:Resources.MW_RibMenuBtnConnections}"
+                                           Icon="/beRemote;component/Images/import32.png"
+                                           Fluent:KeyTip.Keys="I"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnConnections"
+                                           />
+                            <Fluent:Button Header="{x:Static p:Resources.MW_RibMenuBtnSettings}"
+                                           Icon="/beRemote;component/Images/star_32.png"
+                                           Fluent:KeyTip.Keys="S"
+                                           Command="{Binding CmdRibBtnClick}"
+                                           CommandParameter="RibMenuBtnFavorites"
+                                           />
+
+                            <Fluent:SeparatorTabItem/>
+                            <Fluent:Button Header="{x:Static p:Resources.MW_RibMenuClose}"
+                                           Icon="/beRemote;component/Images/close32.png"
+                                           Fluent:KeyTip.Keys="X"
+                                           Command="{Binding CmdMainWindowClose}"
+                                           CommandParameter="{Binding ElementName=beRemote}"
+                                           />
+                        </Fluent:BackstageTabControl>
+                    </Fluent:Backstage>
+                </Grid>
+            </Fluent:Ribbon.Menu>
+
+            <!-- Server Tab -->
+            <Fluent:RibbonTabItem
+                Header="{x:Static p:Resources.MW_RibTabHeadServer}"                
+                Fluent:KeyTip.Keys="S"
+                >
+                <Fluent:RibbonGroupBox
+                    Header="{x:Static p:Resources.MW_RibServerGrpConnections}"
+                    >
+                    <Fluent:SplitButton
+                        Header="{x:Static p:Resources.MW_RibServerBtnAdd}"
+                        LargeIcon="/beRemote;component/Images/greenplus32.png"
+                        Icon="/beRemote;component/Images/greenplus16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnAdd"
+                        Fluent:KeyTip.Keys="A"
+                        ItemsSource="{Binding ProtocolList}"
+                        >
+                        <Fluent:SplitButton.ItemContainerStyle>
+                            <Style TargetType="MenuItem" >
+                                <Setter Property="Command" Value="{Binding DataContext.CmdAddConnection, RelativeSource={RelativeSource AncestorType={x:Type Fluent:SplitButton}}}"/>
+                                <Setter Property="CommandParameter" Value="{Binding ProtocolIdentifier}"/>
+                            </Style>
+                        </Fluent:SplitButton.ItemContainerStyle>
+                        <Fluent:SplitButton.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="4"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="{Binding ProtocolIconSmall}"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding ProtocolName}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </Fluent:SplitButton.ItemTemplate>
+                    </Fluent:SplitButton>
+
+                    <Fluent:Button 
+                        Header="{x:Static p:Resources.MW_RibServerBtnRemove}"
+                        Icon="/beRemote;component/Images/redcross16.png"
+                        Command="{Binding CmdDeleteItem}"
+                        CommandParameter="{Binding ContextItem, ElementName=tvConList}"
+                        Fluent:KeyTip.Keys="D"
+                        SizeDefinition="Middle"
+                        />
+
+                    <Fluent:Button 
+                        Header="{x:Static p:Resources.MW_RibServerBtnAddFolder}"
+                        Icon="/beRemote;component/Images/folderadd16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnAddFolder"
+                        Fluent:KeyTip.Keys="F"
+                        SizeDefinition="Middle"
+                        />
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{x:Static p:Resources.MW_RibServerGrpManage}"
+                    >
+
+                    <Fluent:Button 
+                        Header="{x:Static p:Resources.MW_RibServerBtnCredentials}"
+                        Icon="/beRemote;component/Images/key16.png"
+                        LargeIcon="/beRemote;component/Images/key32.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnCredentials"
+                        Fluent:KeyTip.Keys="C"
+                        />
+
+                    <Fluent:Button 
+                        Header="{x:Static p:Resources.MW_RibServerBtnVpn}"
+                        Icon="/beRemote;component/Images/vpn_16.png"
+                        LargeIcon="/beRemote;component/Images/vpn_32.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnVpn"
+                        Fluent:KeyTip.Keys="V"
+                        />
+
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{x:Static p:Resources.MW_RibServerGrpMore}"
+                    >
+                    <Fluent:Button  
+                        Header="{x:Static p:Resources.MW_RibServerBtnHistory}" 
+                        LargeIcon="/beRemote;component/Images/history32.png"
+                        Icon="/beRemote;component/Images/history16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnHistory"
+                        Fluent:KeyTip.Keys="H"
+                        />
+
+                    <Fluent:Button  
+                        Header="{x:Static p:Resources.MW_RibServerBtnWhoIsOnline}" 
+                        LargeIcon="/beRemote;component/Images/user_group32.png"
+                        Icon="/beRemote;component/Images/user_group16.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibServerBtnWhoIsOnline"
+                        Fluent:KeyTip.Keys="W"
+                        />
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox
+                    Header="{x:Static p:Resources.MW_RibServerGrpFavorites}"
+                    ItemsSource="{Binding FavoriteButtons}"
+                    >
+                    <Fluent:RibbonGroupBox.ItemTemplate>
+                        <DataTemplate>
+                            <Fluent:Button 
+                                Header="{Binding FavItemHost.Name}"
+                                Icon="{Binding FavIconSmall}"
+                                LargeIcon="{Binding FavIconLarge}"
+                                Command="{Binding CmdFavoriteClicked, ElementName=viewModel}"
+                                CommandParameter="{Binding}"
+                                Fluent:KeyTip.Keys="L"
+                                >
+                            </Fluent:Button>
+                        </DataTemplate>
+                    </Fluent:RibbonGroupBox.ItemTemplate>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <!-- Plugin-Tab -->
+            <Fluent:RibbonTabItem
+                Header="{x:Static p:Resources.MW_RibTabHeadToolsAndFeatures}"
+                Fluent:KeyTip.Keys="T"
+                >
+                <Fluent:RibbonGroupBox 
+                    Header="{x:Static p:Resources.MW_RibTafGrpTools}" 
+                    ItemsSource="{Binding ToolsAndFeatures}"
+                    >
+                    <Fluent:RibbonGroupBox.ItemTemplate>
+                        <DataTemplate>
+                            <Fluent:Button
+                                Header="{Binding MetaData.PluginName}"
+                                Icon="{Binding ButtonIcon}"
+                                LargeIcon="{Binding ButtonIcon}"
+                                Tag="{Binding uiPlugin.MetaData.PluginFullQualifiedName}"
+                                Command="{Binding CmdPluginButton, ElementName=viewModel}"
+                                CommandParameter="{Binding}"
+                                Fluent:KeyTip.Keys="P"
+                                />
+                        </DataTemplate>
+                    </Fluent:RibbonGroupBox.ItemTemplate>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <!-- Help-Tab -->
+            <Fluent:RibbonTabItem
+                Header="{x:Static p:Resources.MW_RibTabHeadHelp}"
+                Fluent:KeyTip.Keys="H"
+                >
+                <Fluent:RibbonGroupBox
+                    Header="{x:Static p:Resources.MW_RibHelpGrpHelp}"
+                    >
+                    <Fluent:Button
+                        Header="{x:Static p:Resources.MW_RibHelpBtnHelp}"
+                        Icon="/beRemote;component/Images/question16.png"
+                        LargeIcon="/beRemote;component/Images/question32.png"
+                        Command="{Binding CmdRibBtnClick}"
+                        CommandParameter="RibHelpBtnHelp"
+                        Fluent:KeyTip.Keys="H"
+                        />
+                    <Fluent:Button
+                        Header="{x:Static p:Resources.MW_RibHelpBtnCommunity}"
+                        Icon="/beRemote;component/Images/user_group216.png"
+                        LargeIcon="/beRemote;component/Images/user_group232.png"
+                        Command="{Binding CmdRibBtnClick, ElementName=viewModel}"
+                        CommandParameter="RibHelpBtnCommunity"
+                        Fluent:KeyTip.Keys="C"
+                        />
+                    <Fluent:Button
+                        Header="{x:Static p:Resources.MW_RibHelpBtnAbout}"
+                        Icon="/beRemote;component/Images/infobubble16.png"
+                        LargeIcon="/beRemote;component/Images/infobubble32.png"
+                        Command="{Binding CmdRibBtnClick, ElementName=viewModel}"
+                        CommandParameter="RibHelpBtnAbout"
+                        Fluent:KeyTip.Keys="A"
+                        />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
         
+        <xcad:DockingManager 
+            Grid.Row="1"
+            AllowMixedOrientation="True"
+            BorderBrush="Black"
+            BorderThickness="1"
+            >
+            <xcad:DockingManager.Theme>
+                <xcad:MetroTheme/>
+            </xcad:DockingManager.Theme>
+                        
+            <xcad:DockingManager.DocumentHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
+                        <TextBlock Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </xcad:DockingManager.DocumentHeaderTemplate>
+            
+            <xcad:LayoutRoot x:Name="adMain">
+                <xcad:LayoutPanel Orientation="Horizontal">
+                    <xcad:LayoutAnchorablePane DockWidth="200">
+                        <xcad:LayoutAnchorable 
+                            ContentId="navigation" 
+                            Title="Navigation" 
+                            CanHide="True" 
+                            CanClose="False"
+                            AutoHideWidth="240"
+                            >                            
+                            <TreeView>
+                                <TreeViewItem></TreeViewItem>
+                                <TreeViewItem></TreeViewItem>
+                                <TreeViewItem></TreeViewItem>
+                            </TreeView>
+                        </xcad:LayoutAnchorable>
+                    </xcad:LayoutAnchorablePane>
+                    <xcad:LayoutDocumentPaneGroup>
+                        <xcad:LayoutDocumentPane x:Name="adDocumentPane">
+                            <!-- Document Panes here -->
+                            <!--<xcad:LayoutDocument ContentId="document1" Title="Document 1" >
+                                <Button Content="Document 1 Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </xcad:LayoutDocument>-->                            
+                        </xcad:LayoutDocumentPane>
+                    </xcad:LayoutDocumentPaneGroup >                   
+                </xcad:LayoutPanel>
+            </xcad:LayoutRoot>
+        </xcad:DockingManager>
     </Grid>
-</Window>
+</Fluent:RibbonWindow>
